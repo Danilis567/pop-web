@@ -1,0 +1,15 @@
+{
+  "name": "lupuk-case-study-builder",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "@fontsource/baloo-2": "^5.2.5",
+    "@fontsource/fraunces": "^5.2.5",
+    "@fontsource/jetbrains-mono": "^5.2.5",
+    "@fontsource/plus-jakarta-sans": "^5.2.5",
+    "playwright-core": "^1.52.0"
+  }
+}

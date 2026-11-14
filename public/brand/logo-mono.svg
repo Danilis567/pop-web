@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 64" width="248" height="64" role="img" aria-label="Lüpük Tek Renk Logo">
+  <title>Lüpük</title>
+  <!-- Tek renk amblem -->
+  <g transform="translate(4, 4)">
+    <path d="M6 10 L13 4 L20 10 L28 4 L36 10 L43 4 L50 10 L50 46 L43 52 L36 46 L28 52 L20 46 L13 52 L6 46 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+    <circle cx="20" cy="21" r="4" fill="currentColor"/>
+    <circle cx="36" cy="21" r="4" fill="currentColor"/>
+    <path d="M18 33 Q28 42 38 33" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Tek renk wordmark: lüpük -->
+  <g fill="currentColor" transform="translate(10, -14)">
+    <!-- l -->
+    <rect x="64" y="25" width="10" height="40" rx="5"/>
+    <!-- ü -->
+    <path d="M81 36 a5 5 0 0 1 10 0 v15 a7 7 0 0 0 14 0 v-15 a5 5 0 0 1 10 0 v16 c0 9 -7 14 -17 14 s-17 -5 -17 -14 z"/>
+    <circle cx="90" cy="27" r="4"/>
+    <circle cx="106" cy="27" r="4"/>
+    <!-- p -->
+    <path d="M123 32 a5 5 0 0 1 10 0 v2.5 c2.5 -2.5 6 -4 10 -4 c8.5 0 15 6.8 15 16 s-6.5 16 -15 16 c-4 0 -7.5 -1.5 -10 -4 v12 a5 5 0 0 1 -10 0 z M133 46.5 c0 4.5 3.5 7.5 7.5 7.5 s7.5 -3 7.5 -7.5 s-3.5 -7.5 -7.5 -7.5 s-7.5 3 -7.5 7.5 z"/>
+    <!-- ü -->
+    <path d="M165 36 a5 5 0 0 1 10 0 v15 a7 7 0 0 0 14 0 v-15 a5 5 0 0 1 10 0 v16 c0 9 -7 14 -17 14 s-17 -5 -17 -14 z"/>
+    <circle cx="174" cy="27" r="4"/>
+    <circle cx="190" cy="27" r="4"/>
+    <!-- k -->
+    <rect x="206" y="25" width="10" height="40" rx="5"/>
+    <path d="M216 46 l12 -11 a5 5 0 0 1 7 7 l-9.5 8.5 l10.5 10.5 a5 5 0 0 1 -7 7 l-13 -13 z"/>
+  </g>
+</svg>

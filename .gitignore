@@ -1,5 +1,6 @@
 node_modules/
 dist/
 _archive-v1/
+ref/
 *.tsbuildinfo
 .DS_Store

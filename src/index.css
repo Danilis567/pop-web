@@ -1,6 +1,144 @@
-html,
-body {
-  margin: 0;
-  background: #ffffff;
-  overflow: hidden;
+@import "tailwindcss";
+@import "./styles/tokens.css";
+
+@layer base {
+  html {
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100svh;
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+    overflow-x: clip;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--color-deep-blue);
+    outline-offset: 3px;
+  }
+
+  .dark-surface :focus-visible,
+  [data-surface="dark"] :focus-visible {
+    outline-color: var(--color-cream);
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.font-mono-spec {
+  font-family: var(--font-mono);
+}
+
+.pop-shadow {
+  box-shadow: var(--shadow-pop);
+}
+
+.pop-shadow-sm {
+  box-shadow: var(--shadow-pop-sm);
+}
+
+.pop-shadow-lg {
+  box-shadow: var(--shadow-pop-lg);
+}
+
+.pop-border {
+  border: var(--border-ink);
+}
+
+.pop-checker-band {
+  background-color: var(--color-cream);
+  background-image:
+    linear-gradient(45deg, var(--color-ink) 25%, transparent 25%),
+    linear-gradient(-45deg, var(--color-ink) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, var(--color-ink) 75%),
+    linear-gradient(-45deg, transparent 75%, var(--color-ink) 75%);
+  background-size: var(--pattern-checker-size) var(--pattern-checker-size);
+  background-position:
+    0 0,
+    0 calc(var(--pattern-checker-size) / 2),
+    calc(var(--pattern-checker-size) / 2) calc(var(--pattern-checker-size) / -2),
+    calc(var(--pattern-checker-size) / -2) 0;
+}
+
+.notebook-grid {
+  background-color: var(--color-cream-alt);
+  background-image:
+    linear-gradient(to right, rgba(43, 20, 16, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(43, 20, 16, 0.08) 1px, transparent 1px);
+  background-size: var(--pattern-grid-size) var(--pattern-grid-size);
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-ticker {
+  display: flex;
+  width: max-content;
+  animation: ticker-scroll 28s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Yarım ton nokta deseni (Halftone Dot — BRAND.md §6B) */
+.halftone-dots {
+  background-image: radial-gradient(
+    circle,
+    rgba(43, 20, 16, 0.15) 1.5px,
+    transparent 1.5px
+  );
+  background-size: var(--pattern-halftone-size) var(--pattern-halftone-size);
+}
+
+/* Dikey çizgili tente zemini (Awning Stripe — STYLE.md §1) */
+.awning-stripes {
+  background-color: var(--color-cream);
+  background-image: repeating-linear-gradient(
+    90deg,
+    var(--color-cream-alt) 0px,
+    var(--color-cream-alt) 28px,
+    rgba(255, 111, 168, 0.22) 28px,
+    rgba(255, 111, 168, 0.22) 56px
+  );
+}
+
+/* Yaylı pop geçişi */
+.pop-spring {
+  transition-property: transform, box-shadow, background-color;
+  transition-duration: var(--duration-base);
+  transition-timing-function: var(--ease-pop);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-ticker {
+    animation: none;
+  }
+
+  .pop-spring {
+    transition: none;
+  }
 }

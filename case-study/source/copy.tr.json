@@ -1,0 +1,255 @@
+{
+  "lang": "tr",
+  "meta": {
+    "docTitle": "Lüpük — Marka Kimliği ve E-Ticaret Arayüzü Konsepti",
+    "pageWord": "SAYFA",
+    "conceptTag": "KONSEPT / DEMO PROJE",
+    "placeholderCaption": "Yer tutucu içerik: arayüz yerleşimi için demo fiyatlar ve doğrulanmamış alanlar gösterilir.",
+    "ownerRolePlaceholder": "[Rol — Sahibi tarafından doldurulacak]",
+    "ownerYearPlaceholder": "[Yıl]",
+    "ownerContactPlaceholder": "[E-posta / Portfolyo URL — Sahibi tarafından doldurulacak]",
+    "processOptionalTag": "[Opsiyonel sayfa — Tutulup tutulmayacağına sahibi karar verir]"
+  },
+  "p01": {
+    "kicker": "VAKA ÇALIŞMASI · KONSEPT",
+    "title": "Lüpük",
+    "subtitle": "Retro-pop ambalaj hissinde şekerci markası ve e-ticaret arayüzü.",
+    "metaScopeLabel": "KAPSAM",
+    "metaScopeValue": "Marka Kimliği, Ambalaj Arayüzü, 10 Rotalı Vitrin",
+    "metaRoleLabel": "ROL",
+    "metaYearLabel": "YIL"
+  },
+  "p02": {
+    "title": "Proje Özeti",
+    "lead": "Lüpük, düz beyaz ürün kartları yerine fiziksel şeker poşeti hissini tarayıcıya taşıyan bir konsept vitrindir.",
+    "body1": "Çalışma; marka adı, dört vektör logo varyantı, altı renkli ambalaj sistemi ve 24 ürünlü çalışan bir React mağazasını kapsar.",
+    "body2": "Sitedeki tüm fiyatlar, kargo notları ve ödeme akışı demo yer tutucudur. Gerçek müşteri, satış veya stok verisi yoktur.",
+    "facts": [
+      { "label": "KATEGORİ", "value": "6" },
+      { "label": "ÜRÜN", "value": "24" },
+      { "label": "ROTA", "value": "10" },
+      { "label": "DURUM", "value": "Konsept" }
+    ]
+  },
+  "p03": {
+    "title": "Temel Fikir",
+    "lead": "Tarayıcıdaki her ürün kartını mahalle bakkalı rafından alınan kapalı bir atıştırmalık poşetine benzetmek.",
+    "decisions": [
+      {
+        "num": "01",
+        "head": "Kalın Mürekkep Konturu",
+        "text": "Bulanık gölgeler yerine 2px kakao mürekkebi (#2B1410) çerçeveler ve sert ofset gölgeler kullanıldı."
+      },
+      {
+        "num": "02",
+        "head": "Renge Göre Ambalaj",
+        "text": "Her şeker türüne tek bir doygun düz renk atanarak kategoriler ilk bakışta ayrıştırıldı."
+      },
+      {
+        "num": "03",
+        "head": "Dokunsal Etiketler",
+        "text": "Zikzak üst kesim, yıldız fiyat etiketi ve mono gramaj bandı tüm kartlarda ortak dil oldu."
+      }
+    ],
+    "diagramCaption": "Soyut sistem diyagramı: fiziksel poşet siluetinin arayüz kartına dönüşümü."
+  },
+  "p04": {
+    "title": "Marka ve Logo Sistemi",
+    "lead": "24px favicondan tam genişlik footer yazısına kadar okunaklı kalan beş harfli özgün bir marka adı.",
+    "variants": [
+      { "name": "logo-main.svg", "note": "Hero ve ambalaj ön yüzü (min 180px)" },
+      { "name": "logo-horizontal.svg", "note": "Üst menü ve fiş başlığı (min 132px)" },
+      { "name": "logo-mark.svg", "note": "Favicon ve mühür (min 24px)" },
+      { "name": "logo-mono.svg", "note": "Tek renk footer ve baskı (currentColor)" }
+    ],
+    "rulesTitle": "Güvenli Boşluk ve Kurallar",
+    "rules": [
+      "Yatay logoda dört kenarda en az 16px güvenli boşluk bırakılır.",
+      "Logoya gradyan, bulanık gölge veya orantısız esnetme uygulanmaz.",
+      "Kontrast için koyu kakao (#2B1410) veya krem (#FFF8EE) zemin seçilir."
+    ]
+  },
+  "p05": {
+    "title": "Renk Sistemi",
+    "lead": "Sıcak krem zeminler ekranın %60'ını kaplayarak doygun şeker renklerinin göz yormadan öne çıkmasını sağlar.",
+    "surfacesTitle": "TEMEL ZEMİN VE MÜREKKEP",
+    "categoriesTitle": "ALTI AMBALAJ RENGİ"
+  },
+  "p06": {
+    "title": "Tipografi",
+    "lead": "Türkçe karakterleri (ş, ğ, ı, İ, ç, ö, ü) eksiksiz destekleyen dört açık lisanslı font ailesi.",
+    "families": [
+      {
+        "name": "Baloo 2",
+        "role": "Başlıklar ve Vitrin",
+        "sample": "Aç, kıtırdat, gülümse.",
+        "note": "Fredoka'daki Türkçe ş/ğ uyumsuzluğu görülünce yerine seçildi."
+      },
+      {
+        "name": "Plus Jakarta Sans",
+        "role": "Gövde ve Arayüz",
+        "sample": "Sert şekerden tuzlu kıtırlara 24 çeşit tek vitrinde.",
+        "note": "Uzun ürün açıklamaları ve form alanları için sakin geometrik sans."
+      },
+      {
+        "name": "Fraunces (İtalik)",
+        "role": "Editoryal Vurgu",
+        "sample": "tek rafta",
+        "note": "Hero vurgu hapında ve kısa alıntılarda ölçülü kullanıldı."
+      },
+      {
+        "name": "JetBrains Mono",
+        "role": "Etiket ve Gramajlar",
+        "sample": "PARTİ #26-01 · NET 140G",
+        "note": "DM Mono yerine Türkçe uyumlu mono etiketler için eklendi."
+      }
+    ]
+  },
+  "p07": {
+    "title": "Ambalaj Etiket Sistemi",
+    "lead": "Dört ortak bileşen, standart bir ürün kartını kapalı şeker poşetine dönüştürür.",
+    "callouts": [
+      { "num": "1", "name": "ZigzagEdge", "desc": "Kategori renginde dışa taşan SVG zikzak üst kenar." },
+      { "num": "2", "name": "FlavorStripe", "desc": "Ana aroma notunu taşıyan hap etiket." },
+      { "num": "3", "name": "NetWeightTag", "desc": "Sağa hizalı mono net ağırlık etiketi." },
+      { "num": "4", "name": "StarburstBadge", "desc": "Görsel köşesine yapışan 20 köşeli fiyat rozeti." }
+    ]
+  },
+  "p08": {
+    "title": "Desenler ve Doku",
+    "lead": "Saf CSS ile çizilen tekrarlı desenler ek görsel isteği olmadan baskı dokusu verir.",
+    "patterns": [
+      { "name": "pop-checker-band", "desc": "Bölümleri ayıran 20px kakao-krem dama şeridi." },
+      { "name": "halftone-dots", "desc": "Ürün fotoğraflarının arkasındaki 10px yarım ton nokta." },
+      { "name": "notebook-grid", "desc": "Not kartlarında kullanılan 24px kareli defter zemini." },
+      { "name": "TickerStrip", "desc": "Hareket azaltma uyumlu tereyağı sarısı kayan bant." }
+    ]
+  },
+  "p09": {
+    "title": "Ses ve Ton",
+    "lead": "Kısa, düz ve abartısız mahalle şekercisi dili; tüm sitede tekil 'sen' hitabı.",
+    "rules": [
+      "Ürünü doku ve şekliyle anlat; süslü sıfat yığınından kaçın.",
+      "İşlevsel butonlar düz kalsın: 'Sepete Ekle', 'Sepeti Temizle'.",
+      "Espri yalnızca boş sepet ve 404 sayfası gibi alanlarda yer alsın."
+    ],
+    "samples": [
+      { "where": "Ana Sayfa Hero", "quote": "Aç, kıtırdat, gülümse." },
+      { "where": "404 Sayfası", "quote": "Bu poşet boş çıktı!" },
+      { "where": "Sepet Kargo", "quote": "Hesaplanmadı" },
+      { "where": "Ürün lp-05", "quote": "İki renkli, ekşi şeker kaplı yumuşak şeftali halkaları." }
+    ]
+  },
+  "p10": {
+    "title": "Ürün Evreni (24 Ürün)",
+    "lead": "24 ürünün tamamı saf #FFFFFF zemin üzerinde, 80 KB altında 800px ve 400px WebP olarak hazırlanmıştır.",
+    "note": "Yer tutucu fiyatlar (39–142 TL) ile boş (null) içindekiler ve alerjen alanları gerçek reçete gelene kadar açıkça işaretlenir."
+  },
+  "p11": {
+    "title": "Site Haritası ve Akışlar",
+    "lead": "React Router ile kurulan 10 rota; alışveriş, özel karışım, sepet ve şeffaflık sayfalarına ayrılır.",
+    "flowsTitle": "ANA KULLANICI AKIŞLARI",
+    "flows": [
+      "Alışveriş: Ana Sayfa (/) → Mağaza (/shop/:category) → Ürün (/product/:slug) → Sepet Çekmecesi",
+      "Kendi Poşetin: Üst Menü → Poşet Doldur (/mix) → 4–6 çeşit (50g) seç → Sepet Çekmecesi",
+      "Ödeme: Sepet (/cart) → Demo Ödeme (/checkout) → Yerel onay ekranı"
+    ]
+  },
+  "p12": {
+    "title": "Ekran: Ana Sayfa",
+    "lead": "Hero rafı, kategori sekmeleri, öne çıkanlar karuseli ve RetroDialog'dan oluşan tek akışlı vitrin.",
+    "decisions": [
+      "Yinelenen kategori klasör ızgaraları kaldırılarak CategoryTabs tek kategori seçicisi yapıldı.",
+      "Sert ofset gölgeler yalnızca ana CTA'lar, hero rafı ve ürün kartlarında bırakıldı."
+    ]
+  },
+  "p13": {
+    "title": "Ekran: Mağaza ve Filtreler",
+    "lead": "Fuse.js arama, fiyat aralığı kaydırıcısı, sıralama ve favoriler URL parametreleriyle eşitlenir.",
+    "decisions": [
+      "?q=, ?min=, ?max=, ?sort= ve ?fav=1 parametreleri tarayıcı geçmişiyle senkron çalışır.",
+      "Filtre çubuğu gölgesiz konturlu yüzeye çekilerek ürün kartları öne çıkarıldı."
+    ]
+  },
+  "p14": {
+    "title": "Ekran: Ürün Detay",
+    "lead": "Büyük ambalaj görseli, seçenek hapları, adet seçici, ürün etiketi kartı ve akordeonlar.",
+    "decisions": [
+      "StarburstBadge görsel kutusunun sağ alt köşesine alınarak üst zikzak kenarla çakışma giderildi.",
+      "İçindekiler ve alerjenler null olduğunda açıkça 'Bilgi eklenecek' gösterilir."
+    ]
+  },
+  "p15": {
+    "title": "Ekran: Poşet Doldur (/mix)",
+    "lead": "50g tadım porsiyonlarıyla 4 ila 6 çeşit seçilen gramaj orantılı karışım oluşturucu.",
+    "decisions": [
+      "Math.round((price * 50) / netWeightGrams) formülüyle büyük paketlerdeki aşırı fiyat farkı önlendi.",
+      "50g tartı porsiyonuna uymayan 70–90g tekli lolipop ve sakızlar karışımdan çıkarıldı."
+    ]
+  },
+  "p16": {
+    "title": "Ekran: Sepet ve Demo Ödeme",
+    "lead": "Kalıcı Zustand sepeti (localStorage), karışım poşeti dökümü, fiş özeti ve demo form doğrulaması.",
+    "decisions": [
+      "Kargo satırı ücretsiz izlenimi vermemek için 'Hesaplanmadı' olarak gösterilir.",
+      "Ödeme ekranı kart bilgisi istenmediğini ve gerçek sipariş oluşmadığını açıkça belirtir."
+    ]
+  },
+  "p17": {
+    "title": "Mobil ve Yardımcı Sayfalar",
+    "lead": "390px mobil görünüm, Radix Dialog çekmece menüsü ile Hakkımızda, Bilgi, Kaynaklar ve 404 sayfaları.",
+    "decisions": [
+      "Boş sepet, sonuç yok ve 404 için ambalaj temalı özgün SVG illüstrasyonları çizildi.",
+      "Wikimedia Commons atıfları ayrı bir /credits sayfasına taşındı."
+    ]
+  },
+  "p18": {
+    "title": "Erişilebilirlik ve Duyarlılık",
+    "lead": "360px, 768px ve 1440px kırılmalarında test edildi; Lighthouse Erişilebilirlik puanı 100.",
+    "items": [
+      { "label": "Atlama Bağlantısı", "value": "Tab ile doğrudan #main-content alanına atlar." },
+      { "label": "Odak Halkası", "value": ":focus-visible ile global 3px #1E4DD8 dış çerçeve." },
+      { "label": "Azaltılmış Hareket", "value": "MotionConfig reducedMotion='user' + CSS medya sorgusu." },
+      { "label": "En Düşük Kontrast", "value": "5.22:1 (#1E4DD8 / #FFF8EE); tüm renk çiftleri AA geçer." }
+    ]
+  },
+  "p19": {
+    "title": "Yapay Zekâ Destekli Süreç",
+    "lead": "Çok adımlı yapay zekâ destekli üretim ve ardından uygulanan katı anti-AI temizlik turu.",
+    "steps": [
+      "1. Stil ilkeleri çıkarımı ve marka sistemi kurulumu",
+      "2. 24 ürün kataloğu ve görsel hazırlığı (8 yapay zekâ + 16 Wikimedia)",
+      "3. Anti-AI metin/arayüz temizliği ve tek turlu ekip oylaması",
+      "4. Bağımsız kod denetimleri ve Lighthouse ölçümleri"
+    ],
+    "learnedTitle": "TEMİZLİKTE NELER DEĞİŞTİ",
+    "learned": [
+      "Sert gölge (pop-shadow*) kullanımı %68,9 azaltıldı (61 → 19).",
+      "Lucide ikon çeşidi 18'den 8 işlevsel ikona düşürüldü.",
+      "Doğrulanamayan tazelik, şehir ve politika iddiaları temizlendi."
+    ]
+  },
+  "p20": {
+    "title": "Sınırlar ve Sonraki Adımlar",
+    "lead": "Yer tutucu kalan alanlar ve gerçek yayın öncesinde marka sahibinin sağlaması gereken bilgiler.",
+    "todo": [
+      "24 ürün için doğrulanmış içindekiler, alerjen ve saklama talimatları.",
+      "Gerçek birim fiyatlar, kargo ücretleri, teslimat süreleri ve iade politikası.",
+      "Yerel demo ödeme ekranının yerine gerçek ödeme ve sipariş altyapısı.",
+      "Resmî şirket bilgileri ve 30. sınıf marka tescil taraması."
+    ]
+  },
+  "p21": {
+    "title": "Atıflar ve Lisanslar",
+    "lead": "Açık kaynak araçlar, yerel fontlar, 8 yapay zekâ görseli ve 16 Wikimedia Commons fotoğrafı.",
+    "aiNote": "8 ürün görseli (sert şeker ve jelibon) #FFFFFF zeminli olarak yapay zekâ ile üretilmiştir. 16 Wikimedia fotoğrafının arka planı kaldırılmış/kırpılmış ve 800×800 WebP'ye dönüştürülmüştür. CC BY-SA görseller aynı lisansla (ShareAlike) paylaşılır.",
+    "stackTitle": "TEKNOLOJİ VE FONTLAR",
+    "stackText": "React 19.2, Vite 7.2, Tailwind CSS 4.1, Radix UI, Zustand 5.1, Fuse.js 7.5, Framer Motion 14.14, Embla Carousel 8.6. Fontlar: Baloo 2, Plus Jakarta Sans, Fraunces, JetBrains Mono."
+  },
+  "p22": {
+    "title": "Teşekkürler",
+    "lead": "Lüpük — Konsept marka kimliği ve e-ticaret arayüz çalışması.",
+    "note": "Bu sunumdaki tüm ekranlar, tasarım tokenları ve bileşen çekimleri doğrudan çalışan koddan alınmıştır.",
+    "contactLabel": "İLETİŞİM / BAĞLANTILAR"
+  }
+}

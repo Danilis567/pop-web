@@ -1,0 +1,255 @@
+{
+  "lang": "en",
+  "meta": {
+    "docTitle": "Lüpük — Brand Identity & E-Commerce UI Concept",
+    "pageWord": "PAGE",
+    "conceptTag": "CONCEPT / DEMO PROJECT",
+    "placeholderCaption": "Placeholder content: demo prices and unverified copy shown for layout.",
+    "ownerRolePlaceholder": "[Role — To be filled by owner]",
+    "ownerYearPlaceholder": "[Year]",
+    "ownerContactPlaceholder": "[Email / Portfolio URL — To be filled by owner]",
+    "processOptionalTag": "[Optional page — Owner decides whether to keep]"
+  },
+  "p01": {
+    "kicker": "CASE STUDY · CONCEPT",
+    "title": "Lüpük",
+    "subtitle": "Brand identity and e-commerce UI for a retro-pop candy shop.",
+    "metaScopeLabel": "SCOPE",
+    "metaScopeValue": "Identity, Packaging UI, 10-Route Storefront",
+    "metaRoleLabel": "ROLE",
+    "metaYearLabel": "YEAR"
+  },
+  "p02": {
+    "title": "Project Summary",
+    "lead": "Lüpük is a concept candy and snack storefront built around physical bag cues rather than sterile white grids.",
+    "body1": "The project covers brand naming, four vector logo variants, a six-color packaging system, and a working React storefront with 24 products.",
+    "body2": "Every price, shipping note, and store flow is a demo placeholder. No real transactions, inventory, or customer metrics exist.",
+    "facts": [
+      { "label": "CATEGORIES", "value": "6" },
+      { "label": "PRODUCTS", "value": "24" },
+      { "label": "ROUTES", "value": "10" },
+      { "label": "STATUS", "value": "Concept" }
+    ]
+  },
+  "p03": {
+    "title": "The Core Idea",
+    "lead": "Make a browser card feel like a paper-sealed snack pouch picked off a corner shop rack.",
+    "decisions": [
+      {
+        "num": "01",
+        "head": "Hard Ink Outlines",
+        "text": "Replace soft drop shadows with 2px cocoa-ink borders (#2B1410) and flat offset shadows."
+      },
+      {
+        "num": "02",
+        "head": "Color-Coded Bags",
+        "text": "Assign one saturated flat color per candy type so shoppers scan by flavor family."
+      },
+      {
+        "num": "03",
+        "head": "Tactile Bag Cues",
+        "text": "Use zigzag heat-seal edges, starburst price stickers, and mono weight tags on every card."
+      }
+    ],
+    "diagramCaption": "Abstract system diagram: pouch silhouette translated into UI card anatomy."
+  },
+  "p04": {
+    "title": "Brand & Logo System",
+    "lead": "A five-letter invented Turkish wordmark built to stay legible from a 24px favicon to a full-width footer.",
+    "variants": [
+      { "name": "logo-main.svg", "note": "Hero & packaging front (min 180px)" },
+      { "name": "logo-horizontal.svg", "note": "Header & receipt bar (min 132px)" },
+      { "name": "logo-mark.svg", "note": "Favicon & seal (min 24px)" },
+      { "name": "logo-mono.svg", "note": "Single-ink footer & print (currentColor)" }
+    ],
+    "rulesTitle": "Clear Space & Rules",
+    "rules": [
+      "Keep at least 16px clear space around horizontal lockups.",
+      "Never add gradients, blur shadows, or stretch proportions.",
+      "Always pair dark cocoa ink (#2B1410) or cream (#FFF8EE) for contrast."
+    ]
+  },
+  "p05": {
+    "title": "Color System",
+    "lead": "Warm cream surfaces hold 60% of the viewport so saturated candy colors stay punchy without glare.",
+    "surfacesTitle": "BASE SURFACES & INK",
+    "categoriesTitle": "SIX PACKAGING COLORS"
+  },
+  "p06": {
+    "title": "Typography",
+    "lead": "Four open-source families with full Turkish glyph support (ş, ğ, ı, İ, ç, ö, ü).",
+    "families": [
+      {
+        "name": "Baloo 2",
+        "role": "Display & Headings",
+        "sample": "Aç, kıtırdat, gülümse.",
+        "note": "Replaced Fredoka after testing revealed missing Turkish ş/ğ glyphs."
+      },
+      {
+        "name": "Plus Jakarta Sans",
+        "role": "Body & UI Copy",
+        "sample": "Sert şekerden tuzlu kıtırlara 24 çeşit tek vitrinde.",
+        "note": "Calm geometric sans for long descriptions and form fields."
+      },
+      {
+        "name": "Fraunces (Italic)",
+        "role": "Editorial Accent",
+        "sample": "tek rafta",
+        "note": "Used sparingly inside hero pills and quote accents."
+      },
+      {
+        "name": "JetBrains Mono",
+        "role": "Spec Labels & Weights",
+        "sample": "PARTİ #26-01 · NET 140G",
+        "note": "Replaced DM Mono for crisp Turkish mono badges."
+      }
+    ]
+  },
+  "p07": {
+    "title": "Packaging Label System",
+    "lead": "Four reusable components turn a standard product card into a sealed pouch.",
+    "callouts": [
+      { "num": "1", "name": "ZigzagEdge", "desc": "Outward SVG heat-seal strip colored by category." },
+      { "num": "2", "name": "FlavorStripe", "desc": "Pill badge naming the main flavor note." },
+      { "num": "3", "name": "NetWeightTag", "desc": "Monospace net weight chip aligned right." },
+      { "num": "4", "name": "StarburstBadge", "desc": "20-point price sticker pinned to the image corner." }
+    ]
+  },
+  "p08": {
+    "title": "Patterns & Texture",
+    "lead": "Pure CSS repeating patterns add print texture with zero extra image requests.",
+    "patterns": [
+      { "name": "pop-checker-band", "desc": "20px cocoa-and-cream checkerboard band separating sections." },
+      { "name": "halftone-dots", "desc": "10px dot grid behind product cutouts for comic depth." },
+      { "name": "notebook-grid", "desc": "24px ruled paper grid used on editorial note cards." },
+      { "name": "TickerStrip", "desc": "Continuous butter-yellow marquee with reduced-motion pause." }
+    ]
+  },
+  "p09": {
+    "title": "Voice & Tone",
+    "lead": "Short, direct neighborhood-shop Turkish in informal second person ('sen').",
+    "rules": [
+      "Describe texture and shape directly; skip vague praise.",
+      "Keep functional buttons plain: 'Sepete Ekle', 'Sepeti Temizle'.",
+      "Limit playful humor to empty states and the 404 bag."
+    ],
+    "samples": [
+      { "where": "HomePage Hero", "quote": "Aç, kıtırdat, gülümse." },
+      { "where": "404 Page", "quote": "Bu poşet boş çıktı!" },
+      { "where": "Cart Shipping", "quote": "Hesaplanmadı" },
+      { "where": "Product lp-05", "quote": "İki renkli, ekşi şeker kaplı yumuşak şeftali halkaları." }
+    ]
+  },
+  "p10": {
+    "title": "Product Universe (24 SKUs)",
+    "lead": "All 24 products sit on pure #FFFFFF cutouts inside uniform 800px and 400px WebP files under 80 KB.",
+    "note": "Placeholder prices (39–142 TL) and null ingredients/allergens remain visible until verified recipes arrive."
+  },
+  "p11": {
+    "title": "Site Map & Flows",
+    "lead": "Ten routes built with React Router, split into shopping, custom mix, cart, and transparency pages.",
+    "flowsTitle": "KEY USER FLOWS",
+    "flows": [
+      "Browse: Home (/) → Shop (/shop/:category) → Product (/product/:slug) → CartDrawer",
+      "Custom Mix: Header → Mix (/mix) → Pick 4–6 portions (50g) → CartDrawer",
+      "Checkout: Cart (/cart) → Demo Checkout (/checkout) → Local confirmation"
+    ]
+  },
+  "p12": {
+    "title": "Screen: Home Page",
+    "lead": "Single-column rhythm mixing the hero shelf, category tabs, featured carousel, and RetroDialog.",
+    "decisions": [
+      "Removed duplicate category folder grids so CategoryTabs acts as the single category switcher.",
+      "Kept hard offset shadows only on primary CTAs, hero shelf, and product cards."
+    ]
+  },
+  "p13": {
+    "title": "Screen: Shop & Filters",
+    "lead": "Fuzzy search (Fuse.js), price range slider, sorting, and favorites synced to URL query parameters.",
+    "decisions": [
+      "Syncs ?q=, ?min=, ?max=, ?sort=, and ?fav=1 directly with browser history.",
+      "Flattened the filter bar to a border-only surface so product cards lead visually."
+    ]
+  },
+  "p14": {
+    "title": "Screen: Product Detail",
+    "lead": "Large pouch view paired with option pills, quantity stepper, nutrition label card, and accordions.",
+    "decisions": [
+      "Moved StarburstBadge to the bottom-right of the image box to clear the top zigzag edge.",
+      "Displays 'Bilgi eklenecek' explicitly when ingredients or allergens are null."
+    ]
+  },
+  "p15": {
+    "title": "Screen: Custom Mix (/mix)",
+    "lead": "Pick 4 to 6 items in 50g tasting portions with proportional weight-based pricing.",
+    "decisions": [
+      "Formula: Math.round((price * 50) / netWeightGrams) prevents overcharging heavier packs.",
+      "Excluded single-piece lollipops and gum (70–90g) where 50g scoops make no sense."
+    ]
+  },
+  "p16": {
+    "title": "Screen: Cart & Demo Checkout",
+    "lead": "Persistent Zustand cart (localStorage) with custom mix breakdown, receipt summary, and demo form validation.",
+    "decisions": [
+      "Shipping shows 'Hesaplanmadı' instead of claiming free shipping.",
+      "Checkout clearly warns that no card data or real orders are processed."
+    ]
+  },
+  "p17": {
+    "title": "Mobile & Utility Pages",
+    "lead": "390px mobile layout with a Radix Dialog drawer menu, plus About, Info, Credits, and 404 pages.",
+    "decisions": [
+      "Built distinct packaging SVG illustrations for empty cart, no search results, and 404.",
+      "Separated Wikimedia Commons attributions into a dedicated /credits route."
+    ]
+  },
+  "p18": {
+    "title": "Accessibility & Responsiveness",
+    "lead": "Tested at 360px, 768px, and 1440px with Lighthouse Accessibility reaching 100.",
+    "items": [
+      { "label": "Skip Link", "value": "Jumps directly to #main-content on Tab." },
+      { "label": "Focus Ring", "value": "Global 3px #1E4DD8 outline via :focus-visible." },
+      { "label": "Reduced Motion", "value": "MotionConfig reducedMotion='user' + CSS media query." },
+      { "label": "Min Contrast", "value": "Lowest pair 5.22:1 (#1E4DD8 on #FFF8EE), all AA pass." }
+    ]
+  },
+  "p19": {
+    "title": "AI-Assisted Process",
+    "lead": "Built through an AI-assisted multi-agent workflow followed by a strict anti-AI cleanup pass.",
+    "steps": [
+      "1. Style extraction & brand system definition",
+      "2. 24-product catalog & image preparation (8 AI + 16 Wikimedia)",
+      "3. Anti-AI text & UI cleanup + single-round team voting",
+      "4. Independent code-only layout/copy audits & Lighthouse checks"
+    ],
+    "learnedTitle": "WHAT CHANGED IN CLEANUP",
+    "learned": [
+      "Hard shadows reduced by 68.9% (61 → 19 occurrences).",
+      "Lucide icons trimmed from 18 down to 8 functional icons.",
+      "Unverified freshness, city, and policy claims removed or marked."
+    ]
+  },
+  "p20": {
+    "title": "Limits & Next Steps",
+    "lead": "What remains a placeholder and what the brand owner must provide before a real launch.",
+    "todo": [
+      "Verified ingredient lists, allergen declarations, and storage notes for all 24 SKUs.",
+      "Real unit prices, shipping rates, delivery windows, and return policy copy.",
+      "Backend payment/order integration to replace the local demo checkout.",
+      "Legal company details and official trademark screening (Class 30)."
+    ]
+  },
+  "p21": {
+    "title": "Credits & Licenses",
+    "lead": "Open-source tools, local fonts, 8 AI-generated images, and 16 Wikimedia Commons photos.",
+    "aiNote": "8 product images (sert-seker & jelibon) were generated with AI on #FFFFFF backgrounds. All 16 Wikimedia photos had backgrounds removed/cropped and were converted to 800×800 WebP. CC BY-SA images remain under ShareAlike terms.",
+    "stackTitle": "STACK & FONTS",
+    "stackText": "React 19.2, Vite 7.2, Tailwind CSS 4.1, Radix UI, Zustand 5.1, Fuse.js 7.5, Framer Motion 14.14, Embla Carousel 8.6. Fonts: Baloo 2, Plus Jakarta Sans, Fraunces, JetBrains Mono."
+  },
+  "p22": {
+    "title": "Thank You",
+    "lead": "Lüpük — Concept brand identity and storefront UI.",
+    "note": "All screens, tokens, and component shots in this deck come directly from the working codebase.",
+    "contactLabel": "CONTACT / LINKS"
+  }
+}
