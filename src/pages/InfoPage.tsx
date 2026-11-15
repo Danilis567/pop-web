@@ -8,7 +8,7 @@ export default function InfoPage() {
   usePageMeta(COPY.info.metaTitle, COPY.info.metaDescription);
 
   return (
-    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-10 space-y-12">
+    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-12">
       <div className="space-y-2 max-w-2xl border-b-2 border-[var(--color-ink)] pb-5">
         <h1 className="font-display font-bold text-4xl sm:text-5xl">{COPY.info.title}</h1>
         <p className="text-base text-[var(--color-ink-soft)]">

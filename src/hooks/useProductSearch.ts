@@ -1,6 +1,9 @@
-import { useMemo, useState } from 'react';
-import Fuse, { type IFuseOptions } from 'fuse.js';
+import { useEffect, useMemo, useState } from 'react';
+import type Fuse from 'fuse.js';
+import type { IFuseOptions } from 'fuse.js';
 import type { Product } from '../data/products';
+
+type FuseConstructor = typeof Fuse;
 
 const FUSE_OPTIONS: IFuseOptions<Product> = {
   keys: [
@@ -15,21 +18,51 @@ const FUSE_OPTIONS: IFuseOptions<Product> = {
   minMatchCharLength: 2,
 };
 
+let cachedFuseClass: FuseConstructor | null = null;
+
 export function useProductSearch(sourceProducts: Product[], initialQuery = '') {
   const [query, setQuery] = useState(initialQuery);
+  const [FuseClass, setFuseClass] = useState<FuseConstructor | null>(() => cachedFuseClass);
 
-  const fuse = useMemo(() => new Fuse(sourceProducts, FUSE_OPTIONS), [sourceProducts]);
+  const trimmed = query.trim();
+
+  useEffect(() => {
+    if (!trimmed || FuseClass) return;
+    let cancelled = false;
+    void import('fuse.js').then((mod) => {
+      cachedFuseClass = mod.default;
+      if (!cancelled) {
+        setFuseClass(() => mod.default);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [trimmed, FuseClass]);
+
+  const fuse = useMemo(
+    () => (FuseClass ? new FuseClass(sourceProducts, FUSE_OPTIONS) : null),
+    [FuseClass, sourceProducts],
+  );
 
   const results = useMemo(() => {
-    const trimmed = query.trim();
     if (!trimmed) return sourceProducts;
+    if (!fuse) {
+      const lower = trimmed.toLocaleLowerCase('tr-TR');
+      return sourceProducts.filter(
+        (p) =>
+          p.name.toLocaleLowerCase('tr-TR').includes(lower) ||
+          p.flavor.toLocaleLowerCase('tr-TR').includes(lower) ||
+          (p.subtitle?.toLocaleLowerCase('tr-TR').includes(lower) ?? false),
+      );
+    }
     return fuse.search(trimmed).map((match) => match.item);
-  }, [fuse, query, sourceProducts]);
+  }, [fuse, trimmed, sourceProducts]);
 
   return {
     query,
     setQuery,
     results,
-    isSearching: query.trim().length > 0,
+    isSearching: trimmed.length > 0,
   };
 }

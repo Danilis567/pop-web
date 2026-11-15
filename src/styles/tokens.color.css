@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Lüpük — Renk ve Kontur Tokenları (W2)
+   ========================================================================== */
+
+:root {
+  /* 1. Zemin ve Koyu Kontrast (Siyah yerine derin kakao-bordo) */
+  --color-cream: #FFF8EE;
+  --color-cream-alt: #FDF1DF;
+  --color-white: #FFFFFF;
+  --color-ink: #2B1410;
+  --color-ink-soft: #4A231E;
+
+  /* 2. Ana Pop Renk Paleti (Düz, doygun, gradyansız yüzeyler) */
+  --color-tomato: #C8281C;
+  --color-pink: #FF6FA8;
+  --color-butter: #FFD447;
+  --color-powder-blue: #8ECAE6;
+  --color-deep-blue: #1E4DD8;
+  --color-lime: #9AE63B;
+  --color-tangerine: #FF7A22;
+  --color-lavender: #C9A7FF;
+  --color-cocoa: #6E352C;
+
+  /* 3. 6 Ürün Kategorisi Ambalaj Renkleri */
+  --cat-sert-seker: #C8281C;
+  --cat-sert-seker-ink: #FFF8EE;
+
+  --cat-jelibon: #8ECAE6;
+  --cat-jelibon-ink: #2B1410;
+
+  --cat-cikolata-kapli: #6E352C;
+  --cat-cikolata-kapli-ink: #FFF8EE;
+
+  --cat-lolipop-sakiz: #FF6FA8;
+  --cat-lolipop-sakiz-ink: #2B1410;
+
+  --cat-geleneksel: #C9A7FF;
+  --cat-geleneksel-ink: #2B1410;
+
+  --cat-tuzlu-atistirmalik: #FFD447;
+  --cat-tuzlu-atistirmalik-ink: #2B1410;
+
+  /* 4. Anlamsal (Semantic) Renkler */
+  --bg-page: var(--color-cream);
+  --bg-surface: var(--color-cream-alt);
+  --bg-card: var(--color-white);
+  --text-primary: var(--color-ink);
+  --text-secondary: var(--color-ink-soft);
+  --accent-primary: var(--color-tomato);
+  --accent-secondary: var(--color-deep-blue);
+  --accent-highlight: var(--color-butter);
+  --focus-ring: var(--accent-secondary);
+  --focus-ring-inverse: var(--color-cream);
+  --bg-scrim: color-mix(in srgb, var(--color-ink) 45%, transparent);
+
+  /* Konturlar ve Sert Pop Gölgeler */
+  --border-width: 2px;
+  --border-width-thick: 3px;
+  --border-ink: var(--border-width) solid var(--color-ink);
+  --border-ink-thick: var(--border-width-thick) solid var(--color-ink);
+
+  --shadow-pop-sm: 2px 2px 0 var(--color-ink);
+  --shadow-pop: 4px 4px 0 var(--color-ink);
+  --shadow-pop-lg: 6px 6px 0 var(--color-ink);
+  --shadow-drawer: -6px 0 0 var(--color-ink);
+
+  /* 5. Desen Tokenları */
+  --pattern-grid-line: color-mix(in srgb, var(--color-ink) 8%, transparent);
+  --pattern-halftone-dot: color-mix(in srgb, var(--color-ink) 15%, transparent);
+  --pattern-awning-stripe: color-mix(in srgb, var(--color-pink) 22%, transparent);
+}

@@ -1,0 +1,52 @@
+{
+  "generatedAt": "2026-11-14T18:44:27.148Z",
+  "baseUrl": "http://localhost:4180",
+  "formFactor": "mobile",
+  "routes": {
+    "/": {
+      "scores": {
+        "performance": 84,
+        "accessibility": 100,
+        "bestPractices": 100,
+        "seo": 92
+      },
+      "metrics": {
+        "fcpMs": 766,
+        "lcpMs": 4376,
+        "cls": 0,
+        "tbtMs": 144,
+        "speedIndexMs": 1804
+      }
+    },
+    "/shop": {
+      "scores": {
+        "performance": 87,
+        "accessibility": 99,
+        "bestPractices": 100,
+        "seo": 92
+      },
+      "metrics": {
+        "fcpMs": 775,
+        "lcpMs": 4066,
+        "cls": 0,
+        "tbtMs": 60,
+        "speedIndexMs": 1667
+      }
+    },
+    "/product/visne-limon-cam-seker": {
+      "scores": {
+        "performance": 76,
+        "accessibility": 98,
+        "bestPractices": 100,
+        "seo": 92
+      },
+      "metrics": {
+        "fcpMs": 768,
+        "lcpMs": 4176,
+        "cls": 0.2083,
+        "tbtMs": 53,
+        "speedIndexMs": 1503
+      }
+    }
+  }
+}

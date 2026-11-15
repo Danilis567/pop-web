@@ -43,10 +43,13 @@ export function getRelatedProducts(product: Product, limit = 4): Product[] {
 }
 
 export function formatPrice(amount: number): string {
-  return new Intl.NumberFormat('tr-TR', {
-    style: 'currency',
-    currency: 'TRY',
+  const formatted = new Intl.NumberFormat('tr-TR', {
     minimumFractionDigits: 0,
     maximumFractionDigits: 2,
   }).format(amount);
+  return `${formatted}\u00A0${COPY.common.currencyUnit}`;
+}
+
+export function localeUpper(str: string): string {
+  return str.toLocaleUpperCase('tr-TR');
 }

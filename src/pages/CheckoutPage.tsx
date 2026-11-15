@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { EmptyStateIllustration } from '../components/packaging/EmptyStateIllustration';
 import { COPY } from '../content/copy';
@@ -15,6 +15,10 @@ interface FormState {
   address: string;
 }
 
+type FormField = keyof FormState;
+
+const FIELD_ORDER: FormField[] = ['fullName', 'email', 'phone', 'city', 'address'];
+
 const INITIAL_FORM: FormState = {
   fullName: '',
   email: '',
@@ -22,6 +26,33 @@ const INITIAL_FORM: FormState = {
   city: '',
   address: '',
 };
+
+const FIELD_LABELS: Record<FormField, string> = {
+  fullName: COPY.checkout.fields.fullName,
+  email: COPY.checkout.fields.email,
+  phone: COPY.checkout.fields.phone,
+  city: COPY.checkout.fields.city,
+  address: COPY.checkout.fields.address,
+};
+
+function validateField(field: FormField, value: string): string | undefined {
+  switch (field) {
+    case 'fullName':
+      return value.trim().length < 2 ? COPY.checkout.errors.fullName : undefined;
+    case 'email':
+      return !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim())
+        ? COPY.checkout.errors.email
+        : undefined;
+    case 'phone':
+      return value.replace(/\D/g, '').length < 10
+        ? COPY.checkout.errors.phone
+        : undefined;
+    case 'city':
+      return value.trim().length < 2 ? COPY.checkout.errors.city : undefined;
+    case 'address':
+      return value.trim().length < 10 ? COPY.checkout.errors.address : undefined;
+  }
+}
 
 export default function CheckoutPage() {
   usePageMeta(
@@ -34,31 +65,90 @@ export default function CheckoutPage() {
 
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [errors, setErrors] = useState<Partial<FormState>>({});
+  const [showErrorSummary, setShowErrorSummary] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [orderDone, setOrderDone] = useState(false);
 
-  const validate = (): boolean => {
-    const nextErrors: Partial<FormState> = {};
-    if (form.fullName.trim().length < 2) nextErrors.fullName = COPY.checkout.errors.fullName;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim())) {
-      nextErrors.email = COPY.checkout.errors.email;
-    }
-    if (form.phone.replace(/\D/g, '').length < 10) {
-      nextErrors.phone = COPY.checkout.errors.phone;
-    }
-    if (form.city.trim().length < 2) nextErrors.city = COPY.checkout.errors.city;
-    if (form.address.trim().length < 10) nextErrors.address = COPY.checkout.errors.address;
+  const submitTimerRef = useRef<number | null>(null);
+  const fullNameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const phoneRef = useRef<HTMLInputElement>(null);
+  const cityRef = useRef<HTMLInputElement>(null);
+  const addressRef = useRef<HTMLTextAreaElement>(null);
 
+  const fieldRefs: Record<FormField, React.RefObject<HTMLInputElement | HTMLTextAreaElement | null>> = {
+    fullName: fullNameRef,
+    email: emailRef,
+    phone: phoneRef,
+    city: cityRef,
+    address: addressRef,
+  };
+
+  useEffect(() => {
+    return () => {
+      if (submitTimerRef.current !== null) {
+        window.clearTimeout(submitTimerRef.current);
+      }
+    };
+  }, []);
+
+  const handleFieldChange = (field: FormField, value: string) => {
+    setForm((prev) => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors((prev) => {
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      });
+    }
+  };
+
+  const handleFieldBlur = (field: FormField) => {
+    const error = validateField(field, form[field]);
+    setErrors((prev) => {
+      if (!error) {
+        if (!prev[field]) return prev;
+        const next = { ...prev };
+        delete next[field];
+        return next;
+      }
+      return { ...prev, [field]: error };
+    });
+  };
+
+  const validateAll = (): Partial<FormState> => {
+    const nextErrors: Partial<FormState> = {};
+    for (const field of FIELD_ORDER) {
+      const err = validateField(field, form[field]);
+      if (err) nextErrors[field] = err;
+    }
     setErrors(nextErrors);
-    return Object.keys(nextErrors).length === 0;
+    return nextErrors;
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
-    temizle();
-    setOrderDone(true);
-    triggerAddToCartConfetti();
+    if (isSubmitting) return;
+
+    const nextErrors = validateAll();
+    const firstInvalid = FIELD_ORDER.find((field) => Boolean(nextErrors[field]));
+    if (firstInvalid) {
+      setShowErrorSummary(true);
+      fieldRefs[firstInvalid].current?.focus();
+      return;
+    }
+
+    setShowErrorSummary(false);
+    setIsSubmitting(true);
+    submitTimerRef.current = window.setTimeout(() => {
+      temizle();
+      setOrderDone(true);
+      setIsSubmitting(false);
+      triggerAddToCartConfetti();
+    }, 250);
   };
+
+  const activeErrorFields = FIELD_ORDER.filter((field) => Boolean(errors[field]));
 
   if (orderDone) {
     return (
@@ -74,7 +164,7 @@ export default function CheckoutPage() {
           </p>
           <Link
             to="/shop"
-            className="inline-flex px-6 py-3 rounded-full pop-border bg-[var(--color-cream)] font-display font-semibold text-sm"
+            className="inline-flex px-6 py-3 rounded-full pop-border bg-[var(--color-cream)] font-display font-semibold text-sm hover:bg-[var(--color-butter)] active:translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] transition-colors duration-[var(--duration-fast)]"
           >
             {COPY.common.backToShop}
           </Link>
@@ -84,7 +174,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8">
       <h1 className="font-display font-bold text-4xl">{COPY.checkout.title}</h1>
 
       {/* Açık Demo Uyarısı */}
@@ -106,7 +196,7 @@ export default function CheckoutPage() {
           </p>
           <Link
             to="/shop"
-            className="inline-flex px-6 py-2.5 rounded-full pop-border bg-[var(--color-tomato)] text-[var(--color-cream)] font-display font-semibold text-sm"
+            className="inline-flex px-6 py-2.5 rounded-full pop-border bg-[var(--color-tomato)] text-[var(--color-cream)] font-display font-semibold text-sm hover:brightness-95 active:translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] transition-transform duration-[var(--duration-fast)]"
           >
             {COPY.common.goToShop}
           </Link>
@@ -120,19 +210,51 @@ export default function CheckoutPage() {
           >
             <h2 className="font-display font-bold text-2xl">{COPY.checkout.formTitle}</h2>
 
+            {showErrorSummary && activeErrorFields.length > 0 && (
+              <div
+                role="alert"
+                tabIndex={-1}
+                className="scroll-mt-24 p-4 rounded-[var(--radius-sm)] pop-border bg-[var(--color-butter)] space-y-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
+              >
+                <p className="font-display font-bold text-sm text-[var(--color-tomato)]">
+                  Lütfen formdaki {activeErrorFields.length} alanı kontrol et:
+                </p>
+                <ul className="list-disc list-inside space-y-1 text-xs">
+                  {activeErrorFields.map((field) => (
+                    <li key={field}>
+                      <button
+                        type="button"
+                        onClick={() => fieldRefs[field].current?.focus()}
+                        className="text-left underline font-medium cursor-pointer hover:text-[var(--color-tomato)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] rounded"
+                      >
+                        {FIELD_LABELS[field]}: {errors[field]}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
             <div className="space-y-1">
               <label htmlFor="fullName" className="block font-mono-spec text-xs uppercase">
                 {COPY.checkout.fields.fullName}
               </label>
               <input
+                ref={fullNameRef}
                 id="fullName"
                 type="text"
+                autoComplete="name"
                 value={form.fullName}
-                onChange={(e) => setForm({ ...form, fullName: e.target.value })}
-                className="w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-sm"
+                onChange={(e) => handleFieldChange('fullName', e.target.value)}
+                onBlur={() => handleFieldBlur('fullName')}
+                aria-invalid={Boolean(errors.fullName)}
+                aria-describedby={errors.fullName ? 'fullName-error' : undefined}
+                className="scroll-mt-24 w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-base sm:text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
               />
               {errors.fullName && (
-                <p className="text-xs text-[var(--color-tomato)] font-medium">{errors.fullName}</p>
+                <p id="fullName-error" className="text-xs text-[var(--color-tomato)] font-medium">
+                  {errors.fullName}
+                </p>
               )}
             </div>
 
@@ -142,14 +264,22 @@ export default function CheckoutPage() {
                   {COPY.checkout.fields.email}
                 </label>
                 <input
+                  ref={emailRef}
                   id="email"
                   type="email"
+                  autoComplete="email"
+                  inputMode="email"
                   value={form.email}
-                  onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-sm"
+                  onChange={(e) => handleFieldChange('email', e.target.value)}
+                  onBlur={() => handleFieldBlur('email')}
+                  aria-invalid={Boolean(errors.email)}
+                  aria-describedby={errors.email ? 'email-error' : undefined}
+                  className="scroll-mt-24 w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-base sm:text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
                 />
                 {errors.email && (
-                  <p className="text-xs text-[var(--color-tomato)] font-medium">{errors.email}</p>
+                  <p id="email-error" className="text-xs text-[var(--color-tomato)] font-medium">
+                    {errors.email}
+                  </p>
                 )}
               </div>
 
@@ -158,15 +288,23 @@ export default function CheckoutPage() {
                   {COPY.checkout.fields.phone}
                 </label>
                 <input
+                  ref={phoneRef}
                   id="phone"
                   type="tel"
+                  autoComplete="tel"
+                  inputMode="tel"
                   value={form.phone}
-                  onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                  onChange={(e) => handleFieldChange('phone', e.target.value)}
+                  onBlur={() => handleFieldBlur('phone')}
                   placeholder={COPY.checkout.fields.phonePlaceholder}
-                  className="w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-sm"
+                  aria-invalid={Boolean(errors.phone)}
+                  aria-describedby={errors.phone ? 'phone-error' : undefined}
+                  className="scroll-mt-24 w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-base sm:text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
                 />
                 {errors.phone && (
-                  <p className="text-xs text-[var(--color-tomato)] font-medium">{errors.phone}</p>
+                  <p id="phone-error" className="text-xs text-[var(--color-tomato)] font-medium">
+                    {errors.phone}
+                  </p>
                 )}
               </div>
             </div>
@@ -176,14 +314,21 @@ export default function CheckoutPage() {
                 {COPY.checkout.fields.city}
               </label>
               <input
+                ref={cityRef}
                 id="city"
                 type="text"
+                autoComplete="address-level2"
                 value={form.city}
-                onChange={(e) => setForm({ ...form, city: e.target.value })}
-                className="w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-sm"
+                onChange={(e) => handleFieldChange('city', e.target.value)}
+                onBlur={() => handleFieldBlur('city')}
+                aria-invalid={Boolean(errors.city)}
+                aria-describedby={errors.city ? 'city-error' : undefined}
+                className="scroll-mt-24 w-full h-11 px-4 rounded-xl pop-border bg-[var(--color-white)] text-base sm:text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
               />
               {errors.city && (
-                <p className="text-xs text-[var(--color-tomato)] font-medium">{errors.city}</p>
+                <p id="city-error" className="text-xs text-[var(--color-tomato)] font-medium">
+                  {errors.city}
+                </p>
               )}
             </div>
 
@@ -192,22 +337,31 @@ export default function CheckoutPage() {
                 {COPY.checkout.fields.address}
               </label>
               <textarea
+                ref={addressRef}
                 id="address"
                 rows={3}
+                autoComplete="street-address"
                 value={form.address}
-                onChange={(e) => setForm({ ...form, address: e.target.value })}
-                className="w-full p-3 rounded-xl pop-border bg-[var(--color-white)] text-sm"
+                onChange={(e) => handleFieldChange('address', e.target.value)}
+                onBlur={() => handleFieldBlur('address')}
+                aria-invalid={Boolean(errors.address)}
+                aria-describedby={errors.address ? 'address-error' : undefined}
+                className="scroll-mt-24 w-full p-3 rounded-xl pop-border bg-[var(--color-white)] text-base sm:text-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
               />
               {errors.address && (
-                <p className="text-xs text-[var(--color-tomato)] font-medium">{errors.address}</p>
+                <p id="address-error" className="text-xs text-[var(--color-tomato)] font-medium">
+                  {errors.address}
+                </p>
               )}
             </div>
 
             <button
               type="submit"
-              className="w-full py-3.5 px-6 rounded-full pop-border pop-shadow bg-[var(--color-tomato)] text-[var(--color-cream)] font-display font-bold text-base cursor-pointer"
+              disabled={isSubmitting}
+              aria-busy={isSubmitting}
+              className="w-full py-3.5 px-6 rounded-full pop-border pop-shadow bg-[var(--color-tomato)] text-[var(--color-cream)] font-display font-bold text-base cursor-pointer hover:brightness-95 active:translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] disabled:opacity-60 disabled:cursor-not-allowed transition-transform duration-[var(--duration-fast)]"
             >
-              {COPY.checkout.submitCta}
+              {isSubmitting ? 'İşleniyor...' : COPY.checkout.submitCta}
             </button>
           </form>
 
@@ -220,9 +374,9 @@ export default function CheckoutPage() {
               {items.map((item) => (
                 <li key={item.key} className="flex justify-between gap-3">
                   <span className="truncate">
-                    {item.name} <span className="font-mono-spec text-xs">×{item.quantity}</span>
+                    {item.name} <span className="font-mono-spec text-xs tabular-nums">×{item.quantity}</span>
                   </span>
-                  <span className="font-mono-spec shrink-0">
+                  <span className="font-mono-spec shrink-0 tabular-nums">
                     {formatPrice(item.price * item.quantity)}
                   </span>
                 </li>
@@ -230,7 +384,7 @@ export default function CheckoutPage() {
             </ul>
             <div className="pt-3 border-t-2 border-dashed border-[var(--color-ink)] flex justify-between font-display font-bold text-xl">
               <span>{COPY.checkout.totalLabel}</span>
-              <span>{formatPrice(subtotal)}</span>
+              <span className="tabular-nums">{formatPrice(subtotal)}</span>
             </div>
           </aside>
         </div>

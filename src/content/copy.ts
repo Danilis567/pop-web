@@ -6,8 +6,9 @@ const SITE_COPY = {
     'Bu site arayüz demosudur; gerçek ödeme ve kargo çıkışı yapılmaz.',
   demoCheckoutWarning:
     'Bu sayfa demo amaçlıdır; gerçek ödeme ve sipariş gönderimi yapılmaz.',
+  emptyCatalog: 'Ürün kataloğu henüz boş.',
   allergenFaqAnswer:
-    'Her ürünün detay sayfasındaki "Ürün Etiketi" ve "İçindekiler" panellerinde ürün verisi yer alır; henüz eklenmemiş alanlar için "Bilgi eklenecek" notu gösterilir.',
+    'Her ürünün detay sayfasındaki \u201CÜrün Etiketi\u201D ve \u201Cİçindekiler\u201D panellerinde ürün verisi yer alır; henüz eklenmemiş alanlar için \u201CBilgi eklenecek\u201D notu gösterilir.',
 } as const;
 
 export const COPY = {
@@ -70,7 +71,7 @@ export const COPY = {
     searchCloseAria: 'Aramayı kapat',
     searchPlaceholder: 'Örn: ekşi vişne, jelibon, karamel...',
     searchSubmit: 'Ara',
-    emptyCatalog: 'Ürün kataloğu yüklenmeyi bekliyor.',
+    emptyCatalog: SITE_COPY.emptyCatalog,
     noResults: (query: string) => `\u201C${query}\u201D için eşleşen ürün bulunamadı.`,
     favoritesAria: (count: number) => `Favorilerim (${count} ürün)`,
     cartAria: (count: number) => `Sepeti aç (${count} ürün)`,
@@ -109,7 +110,11 @@ export const COPY = {
   },
   packCard: {
     priceAria: (formattedPrice: string) => `Fiyat: ${formattedPrice}`,
-    addToCartAria: (name: string) => `${name} sepete ekle`,
+    addToCartAria: (name: string) => `${name} ürününü sepete ekle`,
+    addToFavoritesAria: (name?: string) =>
+      name ? `${name} ürününü favorilere ekle` : 'Favorilere ekle',
+    removeFromFavoritesAria: (name?: string) =>
+      name ? `${name} ürününü favorilerden çıkar` : 'Favorilerden çıkar',
   },
   retroDialog: {
     defaultTitle: 'sekerleme_onayi.exe',
@@ -121,6 +126,10 @@ export const COPY = {
   },
   ticker: {
     ariaLabel: 'Kayan duyuru şeridi',
+    pauseAria: 'Kayan duyuru şeridini duraklat',
+    playAria: 'Kayan duyuru şeridini oynat',
+    pauseLabel: 'Duraklat',
+    playLabel: 'Oynat',
     defaultItems: [
       '6 AMBALAJ RENGİ',
       '24 ÇEŞİT ŞEKERLEME',
@@ -179,10 +188,10 @@ export const COPY = {
       { value: 'featured', label: 'Öne Çıkanlar' },
       { value: 'price-asc', label: 'Fiyat: Düşükten Yükseğe' },
       { value: 'price-desc', label: 'Fiyat: Yüksekten Düşüğe' },
-      { value: 'name-asc', label: 'İsim: A-Z' },
+      { value: 'name-asc', label: 'İsim: A\u2013Z' },
     ] as const,
     favoritesLabel: (count: number) => `Favorilerim (${count})`,
-    emptyCatalogTitle: 'Ürün kataloğu henüz boş.',
+    emptyCatalogTitle: SITE_COPY.emptyCatalog,
     emptyResultsTitle: 'Aradığın kriterlere uygun poşet bulunamadı.',
     emptyCatalogSubtitle: 'Şu an vitrinde listelenecek ürün bulunmuyor.',
     emptyResultsSubtitle:
@@ -194,15 +203,15 @@ export const COPY = {
     metaDescription:
       '4–6 farklı şekerleme ve atıştırmalıktan 50 gramlık porsiyonlarla kendi Lüpük karışım poşetini hazırla.',
     pageTitle: 'Kendi Poşetini Doldur',
-    badge: (grams: number) => `4–6 ÇEŞİT · HER BİRİ ${grams}G PORSİYON`,
+    badge: (grams: number) => `4\u20136 ÇEŞİT · HER BİRİ ${grams}\u00A0g PORSİYON`,
     subtitle: (min: number, max: number) =>
       `Raftan en az ${min}, en fazla ${max} farklı çeşit seç; tek bir Lüpük poşetinde toplayalım.`,
     excludedNote:
-      'Not: 70–90 g tekli lolipop ve sakız ürünleri 50 g poşet karışımına dahil edilmez.',
+      'Not: 70\u201390\u00A0g tekli lolipop ve sakız ürünleri 50\u00A0g poşet karışımına dahil edilmez.',
     categoryFilterAria: 'Kategori filtresi',
     allWithCount: (count: number) => `Tümü (${count})`,
     imagePlaceholder: 'GÖRSEL',
-    portionLabel: (grams: number) => `${grams}g porsiyon`,
+    portionLabel: (grams: number) => `${grams}\u00A0g porsiyon`,
     trayAria: 'Karışım poşeti özeti',
     trayTitle: 'Senin Poşetin',
     resetAria: 'Seçimi sıfırla',
@@ -210,7 +219,7 @@ export const COPY = {
     slotLabel: (index: number) => `Bölme #${index + 1}`,
     required: 'Zorunlu',
     optional: 'Opsiyonel',
-    removeFromBagAria: (name: string) => `${name} poşetten çıkar`,
+    removeFromBagAria: (name: string) => `${name} ürününü poşetten çıkar`,
     selectedCountLabel: 'Seçilen Çeşit',
     totalWeightLabel: 'Toplam Gramaj',
     bagTotalLabel: 'Poşet Tutarı',
@@ -248,11 +257,11 @@ export const COPY = {
     clearCart: 'Sepeti Temizle',
     emptyTitle: 'Sepetin şu an boş.',
     emptySubtitle: 'Mağazaya göz atıp istediğin poşetleri sepete ekleyebilirsin.',
-    removeItemAria: (name: string) => `${name} sil`,
+    removeItemAria: (name: string) => `${name} ürününü sil`,
     receiptTitle: 'SEPET FİŞİ',
     itemCountLabel: 'Ürün Adedi',
     shippingLabel: 'Kargo',
-    shippingValue: 'Hesaplanmadı',
+    shippingValue: 'Kargo çıkışı yok',
     totalLabel: 'Toplam',
     checkoutCta: 'Ödemeye Geç',
   },
@@ -261,18 +270,18 @@ export const COPY = {
     metaDescription:
       'Bu sayfa demo amaçlıdır; gerçek ödeme ve sipariş gönderimi yapılmaz.',
     errors: {
-      fullName: 'Ad soyad en az 2 karakter olmalı.',
+      fullName: 'Adını ve soyadını en az 2 karakter olarak gir.',
       email: 'Geçerli bir e-posta adresi gir.',
-      phone: 'En az 10 haneli telefon numarası gir.',
-      city: 'Şehir bilgisi gerekli.',
-      address: 'Açık adres en az 10 karakter olmalı.',
+      phone: '10 veya 11 haneli geçerli bir telefon numarası gir.',
+      city: 'Şehir / ilçe bilgisini en az 2 karakter olarak gir.',
+      address: 'Açık adresini en az 10 karakter olarak gir.',
     },
     doneBadge: 'DEMO SİPARİŞ ALINDI',
     doneTitle: 'Demo siparişin kaydedildi!',
     doneDescription:
       'Bu bir demo ödeme akışıdır; gerçek bir tahsilat veya kargo çıkışı yapılmamıştır.',
     title: 'Ödeme (Demo)',
-    warningTitle: 'Demo Ödeme Ekranı:',
+    warningTitle: 'Demo Ödeme Ekranı',
     warningText:
       'Bu sayfa demo amaçlıdır; gerçek ödeme ve sipariş gönderimi yapılmaz. Kart bilgisi istenmez, yalnızca adres formu doğrulaması gösterilir.',
     emptyTitle: 'Ödeme adımına geçmek için sepetinde ürün olmalı.',
@@ -336,7 +345,7 @@ export const COPY = {
         id: 'storage',
         question: 'Şekerlemeleri nasıl saklamalıyım?',
         answer:
-          'Her ürünün kendi sayfasındaki "Saklama Bilgisi" panelinden güncel notu görebilirsin.',
+          'Her ürünün kendi sayfasındaki \u201CSaklama Bilgisi\u201D panelinden güncel notu görebilirsin.',
       },
       {
         id: 'allergens',

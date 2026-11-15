@@ -16,10 +16,11 @@ export function FlavorStripe({
 }: FlavorStripeProps) {
   return (
     <span
-      className={`inline-flex items-center h-7 px-3 rounded-full pop-border font-mono-spec text-[11px] font-medium uppercase tracking-wider truncate ${className}`}
+      title={label}
+      className={`inline-flex items-center min-w-0 max-w-full h-7 px-3 rounded-full pop-border font-mono-spec text-xs font-medium uppercase tracking-wider ${className}`}
       style={{ backgroundColor: bgColor, color: inkColor }}
     >
-      {label}
+      <span className="truncate">{label}</span>
     </span>
   );
 }

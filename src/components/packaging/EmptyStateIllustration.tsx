@@ -32,8 +32,8 @@ export function EmptyStateIllustration({
           strokeDasharray="5 4"
           strokeLinecap="round"
         />
-        <rect x="42" y="60" width="36" height="22" rx="6" fill="var(--color-butter)" stroke="var(--color-ink)" strokeWidth="2.5" />
-        <text x="60" y="75" textAnchor="middle" fontFamily="monospace" fontWeight="700" fontSize="12" fill="#2B1410">
+        <rect x="42" y="60" width="36" height="22" rx="6" fill="var(--color-butter)" stroke="var(--color-ink)" strokeWidth="3" />
+        <text x="60" y="75" textAnchor="middle" fontFamily="monospace" fontWeight="700" fontSize="12" fill="var(--color-ink)">
           404
         </text>
       </svg>
@@ -49,12 +49,12 @@ export function EmptyStateIllustration({
         aria-hidden="true"
       >
         <rect x="20" y="26" width="66" height="72" rx="14" fill="var(--color-cream)" stroke="var(--color-ink)" strokeWidth="3" />
-        <path d="M20 42 H86" stroke="var(--color-ink)" strokeWidth="2.5" />
+        <path d="M20 42 H86" stroke="var(--color-ink)" strokeWidth="3" />
         <circle cx="34" cy="34" r="3" fill="var(--color-tomato)" />
         <circle cx="44" cy="34" r="3" fill="var(--color-butter)" />
         <circle cx="72" cy="70" r="20" fill="var(--color-powder-blue)" stroke="var(--color-ink)" strokeWidth="3" />
         <path d="M86 84 L102 100" stroke="var(--color-ink)" strokeWidth="5" strokeLinecap="round" />
-        <path d="M65 63 L79 77 M79 63 L65 77" stroke="var(--color-ink)" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M65 63 L79 77 M79 63 L65 77" stroke="var(--color-ink)" strokeWidth="3" strokeLinecap="round" />
       </svg>
     );
   }
@@ -100,9 +100,9 @@ export function EmptyStateIllustration({
         strokeWidth="3"
         strokeLinejoin="round"
       />
-      <path d="M28 46 H92" stroke="var(--color-ink)" strokeWidth="2.5" strokeDasharray="4 4" />
-      <circle cx="60" cy="72" r="14" fill="var(--color-pink)" stroke="var(--color-ink)" strokeWidth="2.5" />
-      <path d="M54 72 H66" stroke="var(--color-ink)" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M28 46 H92" stroke="var(--color-ink)" strokeWidth="3" strokeDasharray="4 4" />
+      <circle cx="60" cy="72" r="14" fill="var(--color-pink)" stroke="var(--color-ink)" strokeWidth="3" />
+      <path d="M54 72 H66" stroke="var(--color-ink)" strokeWidth="3" strokeLinecap="round" />
     </svg>
   );
 }

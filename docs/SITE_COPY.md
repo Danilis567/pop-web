@@ -61,6 +61,8 @@
 | `home.heroShowcaseLabels.visneLimon` | etiket | `src/pages/HomePage.tsx` | `VİŞNE LİMON` | 11 |
 | `home.heroShowcaseLabels.ormanMeyveli` | etiket | `src/pages/HomePage.tsx` | `ORMAN MEYVELİ` | 13 |
 | `home.heroShowcaseLabels.findikliDraje` | etiket | `src/pages/HomePage.tsx` | `FINDIKLI TRÜF` | 13 |
+| `ticker.pauseLabel` | buton | `src/components/packaging/TickerStrip.tsx` | `Duraklat` | 8 |
+| `ticker.playLabel` | buton | `src/components/packaging/TickerStrip.tsx` | `Oynat` | 5 |
 | `ticker.defaultItems[0]` | ticker | `src/components/packaging/TickerStrip.tsx` | `6 AMBALAJ RENGİ` | 15 |
 | `ticker.defaultItems[1]` | ticker | `src/components/packaging/TickerStrip.tsx` | `24 ÇEŞİT ŞEKERLEME` | 18 |
 | `ticker.defaultItems[2]` | ticker | `src/components/packaging/TickerStrip.tsx` | `SERT ŞEKER VE JELİBON` | 21 |
@@ -87,7 +89,7 @@
 | Anahtar (`COPY.*`) | Tür | Bileşen (dosya) | Metin (TR) | Karakter Sayısı |
 | :--- | :--- | :--- | :--- | :---: |
 | `common.tearHere` | etiket | `src/components/packaging/PackCard.tsx` | `BURADAN YIRT` | 12 |
-| `common.currencyUnit` | etiket | `src/components/packaging/PackCard.tsx` | `TL` | 2 |
+| `common.currencyUnit` | etiket | `src/components/packaging/PackCard.tsx` (`formatPrice`) | `TL` (`\u00A0TL` ayrılmaz boşlukla) | 2 |
 | `common.netPrefix` | etiket | `src/components/packaging/PackCard.tsx` | `NET {product.netWeight}` | 7–8 |
 | `common.outOfStock` | rozet | `src/components/packaging/PackCard.tsx` | `Tükendi` | 7 |
 | `common.imagePlaceholder` | yer tutucu | `src/components/packaging/PackCard.tsx` | `GÖRSEL YER TUTUCU` | 17 |
@@ -103,8 +105,8 @@
 | `shop.priceRangeLabel` | etiket | `src/pages/ShopPage.tsx` | `FİYAT ARALIĞI` | 13 |
 | `shop.sortOptions[0]` | seçenek | `src/pages/ShopPage.tsx` | `Öne Çıkanlar` | 12 |
 | `shop.sortOptions[1]` | seçenek | `src/pages/ShopPage.tsx` | `Fiyat: Düşükten Yükseğe` | 23 |
-| `shop.sortOptions[2]` | seçenek | `src/pages/ShopPage.tsx` | `Fiyat: Yüksekten Yükseğe` → `Fiyat: Yüksekten Düşüğe` | 23 |
-| `shop.sortOptions[3]` | seçenek | `src/pages/ShopPage.tsx` | `İsim: A-Z` | 9 |
+| `shop.sortOptions[2]` | seçenek | `src/pages/ShopPage.tsx` | `Fiyat: Yüksekten Düşüğe` | 23 |
+| `shop.sortOptions[3]` | seçenek | `src/pages/ShopPage.tsx` | `İsim: A–Z` | 9 |
 | `common.all` | buton | `src/pages/ShopPage.tsx` | `Tümü` | 4 |
 | `shop.favoritesLabel` | buton | `src/pages/ShopPage.tsx` | `Favorilerim ({count})` | 14+ |
 | `shop.emptyResultsTitle` | durum | `src/pages/ShopPage.tsx` | `Aradığın kriterlere uygun poşet bulunamadı.` | 43 |
@@ -119,11 +121,11 @@
 | :--- | :--- | :--- | :--- | :---: |
 | `mix.pageTitle` | H1 | `src/pages/MixPage.tsx` | `Kendi Poşetini Doldur` | 21 |
 | `mix.subtitle` | gövde | `src/pages/MixPage.tsx` | `Raftan en az 4, en fazla 6 farklı çeşit seç; tek bir Lüpük poşetinde toplayalım.` | 82 |
-| `mix.badge` | rozet | `src/pages/MixPage.tsx` | `4–6 ÇEŞİT · HER BİRİ 50G PORSİYON` | 35 |
+| `mix.badge` | rozet | `src/pages/MixPage.tsx` | `4–6 ÇEŞİT · HER BİRİ 50\u00A0g PORSİYON` (`\u00A0g` ayrılmaz boşluk) | 35 |
 | `mix.allWithCount` | buton | `src/pages/MixPage.tsx` | `Tümü (20)` | 9 |
-| `mix.portionLabel` | etiket | `src/pages/MixPage.tsx` | `50g porsiyon` | 12 |
+| `mix.portionLabel` | etiket | `src/pages/MixPage.tsx` | `50\u00A0g porsiyon` (`\u00A0g` ayrılmaz boşluk) | 12 |
 | `mix.imagePlaceholder` | yer tutucu | `src/pages/MixPage.tsx` | `GÖRSEL` | 6 |
-| `mix.excludedNote` | not | `src/pages/MixPage.tsx` | `Not: 70–90 g tekli lolipop ve sakız ürünleri 50 g poşet karışımına dahil edilmez.` | 82 |
+| `mix.excludedNote` | not | `src/pages/MixPage.tsx` | `Not: 70–90\u00A0g tekli lolipop ve sakız ürünleri 50\u00A0g poşet karışımına dahil edilmez.` | 82 |
 | `mix.trayTitle` | H2 | `src/pages/MixPage.tsx` | `Senin Poşetin` | 13 |
 | `mix.reset` | buton | `src/pages/MixPage.tsx` | `Sıfırla` | 7 |
 | `mix.slotLabel` | etiket | `src/pages/MixPage.tsx` | `Bölme #{index + 1}` | 8 |
@@ -145,7 +147,7 @@
 | `common.home` | breadcrumb | `src/pages/ProductDetailPage.tsx` | `Ana Sayfa` | 9 |
 | `common.shop` | breadcrumb | `src/pages/ProductDetailPage.tsx` | `Mağaza` | 6 |
 | `pdp.flavorLabel` | etiket | `src/pages/ProductDetailPage.tsx` | `Aroma / Seçenek: {selectedFlavor}` | 18+ |
-| `pdp.addToCart` | buton | `src/pages/ProductDetailPage.tsx` | `Sepete Ekle` | 11 |
+| `pdp.addToCart` | buton | `src/pages/ProductDetailPage.tsx` | `Sepete Ekle` (eklendikten sonra geçici `Eklendi`) | 11 |
 | `common.outOfStock` | buton / rozet | `src/pages/ProductDetailPage.tsx` | `Tükendi` | 7 |
 | `pdp.nutritionTitle` | başlık | `src/pages/ProductDetailPage.tsx` | `Ürün Etiketi` | 12 |
 | `pdp.batchCodeLabel` | etiket | `src/pages/ProductDetailPage.tsx` | `Parti Kodu` | 10 |
@@ -173,7 +175,7 @@
 | `cart.receiptTitle` | H2 | `src/pages/CartPage.tsx` | `SEPET FİŞİ` | 10 |
 | `cart.itemCountLabel` | etiket | `src/pages/CartPage.tsx` | `Ürün Adedi` | 10 |
 | `cart.shippingLabel` | etiket | `src/pages/CartPage.tsx` | `Kargo` | 5 |
-| `cart.shippingValue` | etiket | `src/pages/CartPage.tsx` | `Hesaplanmadı` | 12 |
+| `cart.shippingValue` | etiket | `src/pages/CartPage.tsx` | `Kargo çıkışı yok` | 16 |
 | `cart.totalLabel` | etiket | `src/pages/CartPage.tsx` | `Toplam` | 6 |
 | `cart.checkoutCta` | link | `src/pages/CartPage.tsx` | `Ödemeye Geç` | 11 |
 | `checkout.title` | H1 | `src/pages/CheckoutPage.tsx` | `Ödeme (Demo)` | 12 |
@@ -233,18 +235,18 @@
 
 | Kategori | Bileşen / Dosya | Metin |
 | :--- | :--- | :--- |
-| `aria-label` | `src/components/layout/Header.tsx` | `Lüpük Ana Sayfa`, `Ana gezinme`, `Ürün ara`, `Aramayı kapat`, `Favorilerim ({count} ürün)`, `Sepeti aç ({count} ürün)`, `Menüyü aç veya kapat`, `Mobil gezinme` |
+| `aria-label` | `src/components/layout/Header.tsx` | `Lüpük Ana Sayfa`, `Ana gezinme`, `Ürün ara`, `Aramayı kapat`, `Menüyü aç veya kapat`, `Mobil gezinme` (Favori ve Sepet butonlarında `sr-only`: `Favorilerim (… ürün)`, `Sepeti aç (… ürün)`) |
 | `aria-label` | `src/components/packaging/CartDrawer.tsx` | `Sepeti kapat`, `{name} ürününü sil`, `Adet azalt`, `Adet artır` |
 | `aria-label` | `src/components/packaging/CategoryTabs.tsx` | `Ürün kategorileri` |
-| `aria-label` | `src/components/packaging/PackCard.tsx` | `{product.name}`, `Fiyat: {formattedPrice}`, `Favorilerden çıkar` / `Favorilere ekle`, `{product.name} sepete ekle`, `{name} şu an stokta yok` |
-| `aria-label` | `src/components/packaging/TickerStrip.tsx` | `Kayan duyuru şeridi` |
-| `aria-label` | `src/pages/HomePage.tsx` | `Lüpük — 24 Çeşit`, `Önceki ürünler`, `Sonraki ürünler` |
+| `aria-label` | `src/components/packaging/PackCard.tsx` | `{product.name}`, `Fiyat: {formattedPrice}`, `{name} ürününü favorilerden çıkar` / `{name} ürününü favorilere ekle`, `{name} ürününü sepete ekle`, `{name} şu an stokta yok` |
+| `aria-label` | `src/components/packaging/TickerStrip.tsx` | `Kayan duyuru şeridi`, `Kayan duyuru şeridini duraklat` (`ticker.pauseAria`), `Kayan duyuru şeridini oynat` (`ticker.playAria`) |
+| `aria-label` | `src/pages/HomePage.tsx` / `FeaturedCarousel.tsx` | `Lüpük — 24 Çeşit`, `Önceki ürünler`, `Sonraki ürünler` |
 | `aria-label` | `src/pages/ShopPage.tsx` | `Ürün ara`, `Fiyat aralığı`, `Sıralama seç` |
-| `aria-label` | `src/pages/MixPage.tsx` | `Kategori filtresi`, `Karışım poşeti özeti`, `Seçimi sıfırla`, `{name} poşetten çıkar` |
-| `aria-label` | `src/pages/ProductDetailPage.tsx` | `Sayfa yolu`, `Adet azalt`, `Adet artır`, `Favorilerden çıkar` / `Favorilere ekle`, `Fiyat: {formattedPrice}` |
-| `aria-label` | `src/pages/CartPage.tsx` | `Adet azalt`, `Adet artır`, `{name} sil` |
+| `aria-label` | `src/pages/MixPage.tsx` | `Kategori filtresi`, `Karışım poşeti özeti`, `Seçimi sıfırla`, `{name} ürününü poşetten çıkar` |
+| `aria-label` | `src/pages/ProductDetailPage.tsx` | `Sayfa yolu`, `Adet azalt`, `Adet artır`, `{name} ürününü favorilerden çıkar` / `{name} ürününü favorilere ekle`, `Fiyat: {formattedPrice}` (`h2.sr-only`: `Ürün Ayrıntıları`) |
+| `aria-label` | `src/pages/CartPage.tsx` | `Adet azalt`, `Adet artır`, `{name} ürününü sil` |
 | `aria-label` (SVG) | `public/brand/*.svg` | `Lüpük Yatay Logo`, `Lüpük Şekerleme ve Atıştırmalık Ana Logosu`, `Lüpük Amblem`, `Lüpük Tek Renk Logo` |
-| Form Hataları | `src/pages/CheckoutPage.tsx` (`COPY.checkout.errors`) | `Ad soyad en az 2 karakter olmalı.`, `Geçerli bir e-posta adresi gir.`, `En az 10 haneli telefon numarası gir.`, `Şehir bilgisi gerekli.`, `Açık adres en az 10 karakter olmalı.` |
+| Form Hataları | `src/pages/CheckoutPage.tsx` (`COPY.checkout.errors`) | `Adını ve soyadını en az 2 karakter olarak gir.`, `Geçerli bir e-posta adresi gir.`, `10 veya 11 haneli geçerli bir telefon numarası gir.`, `Şehir / ilçe bilgisini en az 2 karakter olarak gir.`, `Açık adresini en az 10 karakter olarak gir.` |
 | Boş Durumlar | `Header`, `CartDrawer`, `ShopPage`, `CartPage`, `CheckoutPage`, `HomePage` | `Ürün kataloğu yüklenmeyi bekliyor.`, `“{query}” için eşleşen ürün bulunamadı.`, `Sepetin şu an boş.`, `Ürün kataloğu henüz boş.`, `Aradığın kriterlere uygun poşet bulunamadı.`, `Bu kategoride ürün bulunamadı.`, `Ödeme adımına geçmek için sepetinde ürün olmalı.` |
 | 404 / Bulunamadı | `ProductDetailPage.tsx`, `NotFoundPage.tsx` | `Bu poşet rafta yok.`, `Bu poşet boş çıktı!` |
 | Sepet / Karışım İsimlendirme | `src/store/cartStore.ts`, `src/content/copy.ts` | Varsayılan aroma: `'Standart'`; Özel karışım adı: `` `Özel Karışım Poşet (${count} Çeşit)` `` |
@@ -255,6 +257,7 @@
 ## 3. Ürün Envanteri (`src/data/products.js` — 24 Ürün)
 
 > Tüm ürünlerde `inStock: true`, `ingredients: null` ve `allergens: null` durumundadır (`ProductDetailPage.tsx` üzerinde `"Bilgi eklenecek"` olarak gösterilir). `compareAtPrice` alanı **tüm ürünlerden kaldırılmıştır (0/24)**.
+> `products.js` içindeki tüm `netWeight` değerleri sayı ile birim arasında ayrılmaz boşluk (`\u00A0g`, örn. `140\u00A0g`) kullanır; tüm fiyatlar `formatPrice()` ile `\u00A0TL` biçiminde gösterilir.
 > `PackCard.tsx` içinde ürün görseli kart başlığıyla aynı bağlantıda yer aldığı için dekoratif `alt=""` kullanır (kart `<article aria-label={product.name}>` taşır); `ProductDetailPage.tsx` ise `product.imageAlt || product.name` değerini kullanır.
 
 | id | slug | name | category | price (TL) | compareAtPrice | weight | subtitle (tam metin) | flavor | image | imageAlt (`ProductDetailPage`) | ingredients / allergens |
@@ -305,13 +308,13 @@
 
 Tüm ürün görselleri `800×800` piksel (`1:1` kare) ve `-400.webp` küçük boyutları `400×400` piksel olarak diskte doğrulanmıştır. `manifest.json` içindeki `bytes800` ve `bytes400` değerlerinin **48/48'i** diskteki gerçek dosya boyutlarıyla birebir eşleşmektedir. Toplam boyut: 800px dosyalar **761,04 KB** (779.300 bayt), 400px dosyalar **257,91 KB** (264.096 bayt).
 
-- **Kullanıldığı yerler ve gösterim:**
-  - `PackCard.tsx` (`HomePage`, `ShopPage`, `ProductDetailPage` ilgili ürünler): `aspect-square`, `object-contain p-3 sm:p-4`, `srcSet` (`-400.webp 400w, .webp 800w`), `loading="lazy"`, `alt=""` (kart `<article aria-label={product.name}>` taşır).
+- **Kullanıldığı yerler ve gösterim (`ProductImage` ortak bileşeni):**
+  - `PackCard.tsx` (`HomePage`, `ShopPage`, `ProductDetailPage` ilgili ürünler): `ProductImage` (`srcSet` `-400.webp 400w, .webp 800w`, `loading="lazy"`), `aspect-square`, `object-contain p-3 sm:p-4`, `alt=""`.
   - `CartDrawer.tsx`: `64×64px` (`w-16 h-16`), `object-contain p-1`, `srcSet`, `alt="${item.name} — ${item.flavor} (${item.netWeight})"`.
-  - `ProductDetailPage.tsx`: `aspect-square`, `object-contain p-3 sm:p-4` (tam `.webp`), `alt={product.imageAlt || product.name}`.
-  - `MixPage.tsx`: `aspect-square`, `object-contain` (tam `.webp`), `loading="lazy"`, `alt={product.name}`.
-  - `CartPage.tsx`: `80×80px` (`w-20 h-20`), `object-contain p-1.5` (tam `.webp`), `alt={item.name}`.
-  - `HomePage.tsx` Hero vitrini (3 ürün: `visne-limon-cam-seker`, `orman-meyveli-ayicik`, `findikli-kakao-truf`): `aspect-square`, `object-contain`, `alt={item.label}`.
+  - `ProductDetailPage.tsx`: `ProductImage` (`priority`, `srcSet`), `aspect-square`, `object-contain p-3 sm:p-4`, `alt={product.imageAlt || product.name}`.
+  - `MixPage.tsx`: `ProductImage` (`srcSet`, `loading="lazy"`), `aspect-square`, `object-contain`, `alt={product.name}`.
+  - `CartPage.tsx`: `ProductImage` (`srcSet`, `80×80px`), `object-contain p-1.5`, `alt={item.name}`.
+  - `HomePage.tsx` Hero vitrini (3 ürün: `visne-limon-cam-seker`, `orman-meyveli-ayicik`, `findikli-kakao-truf`): `ProductImage` (`srcSet`, ilk üründe `priority`), `aspect-square`, `object-contain`, `alt={item.label}`.
   - `AboutPage.tsx` (`antep-fistikli-rulo-lokum`): `176×176px` (`w-44 h-44 rounded-full`), `object-contain`, `alt={COPY.about.showcaseImageAlt}` (`"Antep Fıstıklı Rulo Lokum"`).
 
 | Slug | 800px Boyut (KB) | 400px Boyut (KB) | Kaynak (`manifest.json` & `/credits`) | Yazar (`/credits`) | Lisans |
@@ -360,7 +363,7 @@ Tüm ürün görselleri `800×800` piksel (`1:1` kare) ve `-400.webp` küçük b
 - **Önceden kullanılmayan logo:** `public/brand/logo-mono.svg` artık `Footer.tsx` içinde kullanılmaktadır.
 - **Düzeltilen `alt` tutarsızlığı:** `AboutPage.tsx` içinde ürün dosyası ve `alt` metni `antep-fistikli-rulo-lokum.webp` / `"Antep Fıstıklı Rulo Lokum"` olarak düzeltilmiştir.
 - **Küçük görsel şeridi (`ProductDetailPage.tsx`, satır 367):** `<img src={img} alt="" ... />` şu an her üründe tek görsel olduğu için render edilmemektedir; çoklu galeri eklenirse erişilebilir `alt` metni verilmelidir.
-- **Performans notu:** `PackCard.tsx` ve `CartDrawer.tsx` küçük boyutlu `-400.webp` (`srcSet`) kullanırken; `HomePage.tsx` Hero vitrini (`aspect-square`), `MixPage.tsx` ve `CartPage.tsx` doğrudan 800px `.webp` yüklemektedir. `object-contain` sayesinde kırpılma riski yoktur.
+- **Performans notu:** `PackCard.tsx`, `HomePage.tsx` Hero vitrini, `MixPage.tsx`, `ProductDetailPage.tsx` ve `CartPage.tsx` artık ortak `ProductImage` bileşeni üzerinden `-400.webp` + `400w, 800w` `srcSet` kullanmaktadır (`CartDrawer.tsx` de aynı `srcSet` yapısını kullanır). `object-contain` sayesinde kırpılma riski yoktur.
 
 ---
 
@@ -381,10 +384,10 @@ Tüm ürün görselleri `800×800` piksel (`1:1` kare) ve `-400.webp` küçük b
 | `/credits` (`CreditsPage`) | `Görsel Kaynakları \| Lüpük` | `Lüpük ürün kataloğunda kullanılan Wikimedia Commons fotoğraflarının yazar, lisans ve düzenleme bilgileri.` | `usePageMeta` ile güncellenir. |
 | `*` (`NotFoundPage`) | `Sayfa Bulunamadı (404) \| Lüpük` | `Aradığın sayfa bulunamadı.` | `usePageMeta` ile güncellenir. |
 
-- `public/robots.txt`: **Var** (`User-agent: *`, `Allow: /`, `Sitemap: /sitemap.xml` — 46 B)
-- `public/sitemap.xml`: **Var** (`/`, `/shop`, 6 kategori `/shop/:category`, `/mix`, `/about`, `/info`, `/credits` — 12 URL, 547 B)
+- `public/robots.txt`: **Var** (`User-agent: *`, `Allow: /`, `Sitemap: https://lupuk.com.tr/sitemap.xml` — 66 B)
+- `public/sitemap.xml`: **Var** (`https://lupuk.com.tr/` altında `/`, `/shop`, 6 kategori `/shop/:category`, `/mix`, `/about`, `/info`, `/credits` — 12 URL, 787 B)
 - `public/og-image.png`: **Var** (`1200×630` — 33,19 KB)
-- Favicon: **Var** (`/brand/logo-mark.svg`)
+- Favicon & Manifest: **Var** (`/brand/logo-mark.svg`, `/favicon-32x32.png`, `/apple-touch-icon.png`, `/site.webmanifest`)
 
 ---
 
@@ -458,5 +461,5 @@ OVERALL: PASS
 
 - **Yer tutucu fiyatlar:** `src/data/products.js` satır 1'de belirtildiği üzere tüm 24 ürünün `price` değerleri gerçek maliyet/satış fiyatları belirlenene kadar yer tutucudur (`compareAtPrice` kaldırılmıştır).
 - **Eksik ürün verileri:** Tüm 24 üründe `ingredients: null` ve `allergens: null` (`ProductDetailPage.tsx` üzerinde `"Bilgi eklenecek"` olarak görünür; `defaultStorage` ise `"Saklama bilgisi eklenecek."`).
-- **Netleşmemiş teslimat, iade ve kargo alanları:** `InfoPage.tsx` (`deliveryText`, `returnsText`, ilgili SSS yanıtları) `"netleşince eklenecek."` yer tutucusunu kullanır; `CartPage.tsx` kargo satırı `"Hesaplanmadı"` gösterir.
+- **Netleşmemiş teslimat, iade ve kargo alanları:** `InfoPage.tsx` (`deliveryText`, `returnsText`, ilgili SSS yanıtları) `"netleşince eklenecek."` yer tutucusunu kullanır; `CartPage.tsx` kargo satırı `"Kargo çıkışı yok"` gösterir.
 - **Demo ödeme akışı:** `Footer.tsx` (`site.footerNote`) ve `CheckoutPage.tsx` sitenin arayüz demosu olduğunu ve gerçek tahsilat/kargo çıkışı yapılmadığını açıkça belirtir; KVKK veya mesafeli satış sözleşmesi sayfaları yoktur.

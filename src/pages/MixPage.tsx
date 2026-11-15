@@ -1,5 +1,6 @@
-import { Plus, ShoppingBag, X } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { Check, Plus, ShoppingBag, X } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { ProductImage } from '../components/packaging/ProductImage';
 import { ZigzagEdge } from '../components/packaging/ZigzagEdge';
 import { COPY } from '../content/copy';
 import { products, type Product } from '../data/products';
@@ -36,6 +37,16 @@ export default function MixPage() {
 
   const [activeCategory, setActiveCategory] = useState<string>('tumu');
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [justAdded, setJustAdded] = useState(false);
+  const addedTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (addedTimerRef.current !== null) {
+        window.clearTimeout(addedTimerRef.current);
+      }
+    };
+  }, []);
 
   const visibleProducts = useMemo(() => {
     if (activeCategory === 'tumu') return mixableProducts;
@@ -81,10 +92,18 @@ export default function MixPage() {
     }));
     addCustomMix(selectedProducts, totalPrice, `${totalGrams}g`, mixItems);
     setSelectedIds([]);
+    setJustAdded(true);
+    if (addedTimerRef.current !== null) {
+      window.clearTimeout(addedTimerRef.current);
+    }
+    addedTimerRef.current = window.setTimeout(() => {
+      setJustAdded(false);
+      addedTimerRef.current = null;
+    }, 1800);
   };
 
   return (
-    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 pt-8 sm:py-10 pb-24 lg:pb-10 space-y-8">
       {/* Tepsi Odaklı Kompakt Başlık */}
       <div className="flex flex-wrap items-baseline justify-between gap-4 border-b-2 border-[var(--color-ink)] pb-4">
         <div className="space-y-1">
@@ -113,10 +132,10 @@ export default function MixPage() {
               type="button"
               onClick={() => setActiveCategory('tumu')}
               aria-pressed={activeCategory === 'tumu'}
-              className={`px-4 py-1.5 rounded-full pop-border font-display font-semibold text-sm cursor-pointer transition-colors ${
+              className={`min-h-[44px] px-4 py-2 rounded-full pop-border inline-flex items-center font-display font-semibold text-sm cursor-pointer transition-colors duration-[var(--duration-fast)] active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] ${
                 activeCategory === 'tumu'
                   ? 'bg-[var(--color-ink)] text-[var(--color-cream)]'
-                  : 'bg-[var(--color-cream-alt)]'
+                  : 'bg-[var(--color-cream-alt)] hover:bg-[var(--color-butter)]'
               }`}
             >
               {COPY.mix.allWithCount(mixableProducts.length)}
@@ -129,7 +148,7 @@ export default function MixPage() {
                   type="button"
                   onClick={() => setActiveCategory(cat.slug)}
                   aria-pressed={active}
-                  className="px-4 py-1.5 rounded-full pop-border font-display font-semibold text-sm cursor-pointer transition-colors"
+                  className="min-h-[44px] px-4 py-2 rounded-full pop-border inline-flex items-center font-display font-semibold text-sm cursor-pointer transition-colors duration-[var(--duration-fast)] hover:brightness-95 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
                   style={{
                     backgroundColor: active ? cat.color : 'var(--color-cream-alt)',
                     color: active ? cat.inkColor : 'var(--color-ink)',
@@ -142,7 +161,7 @@ export default function MixPage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-            {visibleProducts.map((product) => {
+            {visibleProducts.map((product, index) => {
               const isSelected = selectedIds.includes(product.id);
               const isFull = !isSelected && selectedIds.length >= MAX_MIX_ITEMS;
               const category = getCategoryBySlug(product.category);
@@ -155,7 +174,7 @@ export default function MixPage() {
                   onClick={() => toggleProduct(product.id)}
                   disabled={isFull}
                   aria-pressed={isSelected}
-                  className={`text-left p-4 rounded-[var(--radius-card)] pop-border transition-transform flex flex-col gap-3 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed ${
+                  className={`text-left p-4 rounded-[var(--radius-card)] pop-border transition-transform flex flex-col gap-3 cursor-pointer active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 ${
                     isSelected
                       ? 'bg-[var(--color-butter)] -translate-y-0.5'
                       : 'bg-[var(--color-cream-alt)] hover:-translate-y-0.5'
@@ -163,7 +182,7 @@ export default function MixPage() {
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span
-                      className="px-2.5 py-0.5 rounded-full pop-border font-mono-spec text-[10px] uppercase truncate"
+                      className="px-2.5 py-0.5 rounded-full pop-border font-mono-spec text-xs font-medium uppercase truncate"
                       style={{
                         backgroundColor: category?.color ?? 'var(--color-cream)',
                         color: category?.inkColor ?? 'var(--color-ink)',
@@ -175,35 +194,32 @@ export default function MixPage() {
                       {isSelected ? (
                         <span className="text-[var(--color-tomato)]" aria-hidden="true">✓</span>
                       ) : (
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-4 h-4" aria-hidden="true" />
                       )}
                     </span>
                   </div>
 
-                  <div className="aspect-square w-full rounded-xl pop-border bg-[var(--color-white)] overflow-hidden flex items-center justify-center p-3 sm:p-4">
-                    {product.image ? (
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        loading="lazy"
-                        className="w-full h-full object-contain"
-                      />
-                    ) : (
-                      <span className="font-mono-spec text-xs text-[var(--color-ink-soft)]">
-                        {COPY.mix.imagePlaceholder}
-                      </span>
-                    )}
+                  <div className="aspect-square w-full rounded-xl pop-border bg-[var(--color-white)] overflow-hidden flex items-center justify-center">
+                    <ProductImage
+                      src={product.image}
+                      alt={product.name}
+                      width={400}
+                      height={400}
+                      sizes="(max-width: 640px) 85vw, (max-width: 1280px) 42vw, 22vw"
+                      priority={index < 4}
+                      className="w-full h-full object-contain p-3 sm:p-4"
+                    />
                   </div>
 
                   <div className="flex-1">
-                    <p className="font-display font-semibold text-base leading-snug line-clamp-1">
+                    <p className="font-display font-semibold text-base leading-snug line-clamp-2 min-h-[2.75rem]">
                       {product.name}
                     </p>
                     <div className="mt-1 flex items-center justify-between font-mono-spec text-xs">
                       <span className="text-[var(--color-ink-soft)]">
                         {COPY.mix.portionLabel(PORTION_GRAMS)}
                       </span>
-                      <span className="font-bold text-[var(--color-ink)]">
+                      <span className="font-bold tabular-nums text-[var(--color-ink)]">
                         +{formatPrice(portionPrice)}
                       </span>
                     </div>
@@ -221,7 +237,7 @@ export default function MixPage() {
         {/* Sağ: Canlı Karışım Poşeti Tepsisi */}
         <aside
           aria-label={COPY.mix.trayAria}
-          className="relative mt-2.5 lg:col-span-4 lg:sticky lg:top-24 rounded-b-[var(--radius-card)] rounded-t-sm pop-border pop-shadow-lg bg-[var(--color-cream-alt)] overflow-visible"
+          className="relative mt-3 lg:col-span-4 lg:sticky lg:top-28 rounded-b-[var(--radius-card)] rounded-t-sm pop-border pop-shadow-lg bg-[var(--color-cream-alt)] overflow-visible"
         >
           <ZigzagEdge color="var(--color-tomato)" />
 
@@ -233,7 +249,7 @@ export default function MixPage() {
                   type="button"
                   onClick={() => setSelectedIds([])}
                   aria-label={COPY.mix.resetAria}
-                  className="inline-flex items-center gap-1 font-mono-spec text-xs uppercase underline cursor-pointer text-[var(--color-ink-soft)] hover:text-[var(--color-tomato)]"
+                  className="min-h-[44px] min-w-[44px] px-2 inline-flex items-center justify-center gap-1 rounded-full font-mono-spec text-xs uppercase underline cursor-pointer text-[var(--color-ink-soft)] hover:text-[var(--color-tomato)] active:scale-[0.96] transition-transform focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
                 >
                   <span aria-hidden="true">↺</span>
                   {COPY.mix.reset}
@@ -265,7 +281,7 @@ export default function MixPage() {
                     className="h-12 px-3 rounded-xl pop-border bg-[var(--color-cream)] flex items-center justify-between gap-2"
                   >
                     <div className="min-w-0 flex items-center gap-2">
-                      <span className="font-mono-spec text-[11px] px-1.5 py-0.5 rounded bg-[var(--color-butter)] border border-[var(--color-ink)]">
+                      <span className="font-mono-spec text-xs font-medium tabular-nums px-1.5 py-0.5 rounded bg-[var(--color-butter)] border border-[var(--color-ink)]">
                         {PORTION_GRAMS}g
                       </span>
                       <span className="font-display font-semibold text-sm truncate">
@@ -276,9 +292,9 @@ export default function MixPage() {
                       type="button"
                       onClick={() => toggleProduct(item.id)}
                       aria-label={COPY.mix.removeFromBagAria(item.name)}
-                      className="w-7 h-7 rounded-full hover:bg-[var(--color-pink)] flex items-center justify-center shrink-0 cursor-pointer"
+                      className="w-11 h-11 min-w-[44px] min-h-[44px] -mr-1.5 rounded-full hover:bg-[var(--color-pink)] flex items-center justify-center shrink-0 cursor-pointer transition-colors active:scale-[0.94] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)]"
                     >
-                      <X className="w-4 h-4" />
+                      <X className="w-4 h-4" aria-hidden="true" />
                     </button>
                   </div>
                 );
@@ -294,7 +310,7 @@ export default function MixPage() {
                 <span className="font-mono-spec uppercase text-[var(--color-ink-soft)]">
                   {COPY.mix.selectedCountLabel}
                 </span>
-                <span className="font-mono-spec font-medium">
+                <span className="font-mono-spec font-medium tabular-nums">
                   {selectedProducts.length} / {MAX_MIX_ITEMS}
                 </span>
               </div>
@@ -302,11 +318,11 @@ export default function MixPage() {
                 <span className="font-mono-spec uppercase text-[var(--color-ink-soft)]">
                   {COPY.mix.totalWeightLabel}
                 </span>
-                <span className="font-mono-spec font-medium">{COPY.common.netPrefix}{totalGrams}g</span>
+                <span className="font-mono-spec font-medium tabular-nums">{COPY.common.netPrefix}{totalGrams}g</span>
               </div>
               <div className="flex justify-between items-baseline pt-2">
                 <span className="font-display font-bold text-lg">{COPY.mix.bagTotalLabel}</span>
-                <span className="font-display font-bold text-2xl text-[var(--color-tomato)]">
+                <span className="font-display font-bold text-2xl tabular-nums text-[var(--color-tomato)]">
                   {formatPrice(totalPrice)}
                 </span>
               </div>
@@ -316,15 +332,52 @@ export default function MixPage() {
               type="button"
               onClick={handleAddMixToCart}
               disabled={!isReady}
-              className="w-full py-3.5 px-6 rounded-full pop-border pop-shadow bg-[var(--color-tomato)] text-[var(--color-cream)] font-display font-bold text-base flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed"
+              className="w-full min-h-[48px] py-3.5 px-6 rounded-full pop-border pop-shadow bg-[var(--color-tomato)] text-[var(--color-cream)] font-display font-bold text-base flex items-center justify-center gap-2 cursor-pointer transition-transform duration-[var(--duration-fast)] hover:brightness-95 hover:-translate-y-0.5 active:scale-[0.97] active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:brightness-100 disabled:hover:translate-y-0 disabled:active:scale-100"
             >
-              <ShoppingBag className="w-5 h-5" />
-              {isReady
-                ? COPY.mix.addMixToCart
-                : COPY.mix.minSelectionRemaining(MIN_MIX_ITEMS, MIN_MIX_ITEMS - selectedProducts.length)}
+              {justAdded ? (
+                <Check className="w-5 h-5" aria-hidden="true" />
+              ) : (
+                <ShoppingBag className="w-5 h-5" aria-hidden="true" />
+              )}
+              {justAdded
+                ? 'Eklendi'
+                : isReady
+                  ? COPY.mix.addMixToCart
+                  : COPY.mix.minSelectionRemaining(MIN_MIX_ITEMS, MIN_MIX_ITEMS - selectedProducts.length)}
             </button>
           </div>
         </aside>
+      </div>
+
+      {/* Mobil Yapışkan Poşet Özeti Çubuğu */}
+      <div className="lg:hidden fixed bottom-0 inset-x-0 z-[var(--z-sticky,40)] border-t-2 border-[var(--color-ink)] bg-[var(--color-cream)] px-4 pb-[env(safe-area-inset-bottom)]">
+        <div className="py-3 flex items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="font-display font-bold text-lg text-[var(--color-tomato)] tabular-nums leading-tight">
+              {formatPrice(totalPrice)}
+            </p>
+            <p className="font-mono-spec text-xs text-[var(--color-ink-soft)] tabular-nums truncate">
+              {selectedProducts.length}/{MAX_MIX_ITEMS} · {COPY.common.netPrefix}{totalGrams}g
+            </p>
+          </div>
+          <button
+            type="button"
+            onClick={handleAddMixToCart}
+            disabled={!isReady}
+            className="min-h-[44px] h-11 px-5 rounded-full pop-border pop-shadow bg-[var(--color-tomato)] text-[var(--color-cream)] font-display font-bold text-sm flex items-center justify-center gap-2 shrink-0 cursor-pointer transition-transform duration-[var(--duration-fast)] hover:brightness-95 active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-deep-blue)] disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed disabled:hover:brightness-100 disabled:active:scale-100"
+          >
+            {justAdded ? (
+              <Check className="w-4 h-4" aria-hidden="true" />
+            ) : (
+              <ShoppingBag className="w-4 h-4" aria-hidden="true" />
+            )}
+            {justAdded
+              ? 'Eklendi'
+              : isReady
+                ? COPY.mix.addMixToCart
+                : COPY.mix.minSelectionRemaining(MIN_MIX_ITEMS, MIN_MIX_ITEMS - selectedProducts.length)}
+          </button>
+        </div>
       </div>
     </div>
   );

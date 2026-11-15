@@ -95,7 +95,7 @@ export function Footer() {
         aria-hidden="true"
       >
         <p
-          className="font-display font-bold text-center text-[var(--color-tomato)] tracking-tight leading-[0.82] translate-y-[18%]"
+          className="font-display font-bold text-center text-[var(--color-tomato)] tracking-tight leading-[0.82] translate-y-[26%]"
           style={{ fontSize: 'var(--text-footer-wordmark)' }}
         >
           {COPY.footer.wordmark}

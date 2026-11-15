@@ -1,12 +1,15 @@
 @import "tailwindcss";
 @import "./styles/tokens.css";
 
+@custom-variant hover (@media (hover: hover));
+
 @layer base {
   html {
     background-color: var(--bg-page);
     color: var(--text-primary);
     font-family: var(--font-body);
     scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
   }
 
   body {
@@ -14,19 +17,36 @@
     min-height: 100svh;
     background-color: var(--bg-page);
     color: var(--text-primary);
+    line-height: 1.5;
     overflow-x: clip;
     -webkit-font-smoothing: antialiased;
   }
 
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
   :focus-visible {
-    outline: 3px solid var(--color-deep-blue);
-    outline-offset: 3px;
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 2px var(--focus-ring-inverse);
   }
 
   .dark-surface :focus-visible,
   [data-surface="dark"] :focus-visible {
-    outline-color: var(--color-cream);
+    outline-color: var(--focus-ring-inverse);
+    box-shadow: 0 0 0 2px var(--color-ink);
   }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
 }
 
 .font-display {
@@ -76,8 +96,8 @@
 .notebook-grid {
   background-color: var(--color-cream-alt);
   background-image:
-    linear-gradient(to right, rgba(43, 20, 16, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(43, 20, 16, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, var(--pattern-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--pattern-grid-line) 1px, transparent 1px);
   background-size: var(--pattern-grid-size) var(--pattern-grid-size);
 }
 
@@ -104,7 +124,7 @@
 .halftone-dots {
   background-image: radial-gradient(
     circle,
-    rgba(43, 20, 16, 0.15) 1.5px,
+    var(--pattern-halftone-dot) 1.5px,
     transparent 1.5px
   );
   background-size: var(--pattern-halftone-size) var(--pattern-halftone-size);
@@ -117,21 +137,29 @@
     90deg,
     var(--color-cream-alt) 0px,
     var(--color-cream-alt) 28px,
-    rgba(255, 111, 168, 0.22) 28px,
-    rgba(255, 111, 168, 0.22) 56px
+    var(--pattern-awning-stripe) 28px,
+    var(--pattern-awning-stripe) 56px
   );
 }
 
 /* Yaylı pop geçişi */
 .pop-spring {
-  transition-property: transform, box-shadow, background-color;
-  transition-duration: var(--duration-base);
+  transition-property: transform, background-color;
+  transition-duration: var(--duration-fast);
   transition-timing-function: var(--ease-pop);
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 
   .animate-ticker {

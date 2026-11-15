@@ -1,6 +1,6 @@
 # SITE_LAYOUT.md — Yapı, Tasarım ve Yerleşim Haritası
 
-> Bu doküman `src/`, `src/content/copy.ts`, `src/data/products.js`, `src/styles/tokens.css`, `src/index.css`, `index.html`, `public/` ve `package.json` dosyalarındaki **gerçek uygulama kodu** okunarak sıfırdan üretilmiştir. Wireframe ve yerleşim açıklamalarında ekranda görünen metinler yerine `src/content/copy.ts` anahtarlarıyla uyumlu `[anahtar]` yer tutucuları kullanılmıştır.
+> Bu doküman `src/`, `src/content/copy.ts`, `src/data/products.js`, `src/styles/tokens*.css`, `src/index.css`, `index.html`, `public/` ve `package.json` dosyalarındaki **gerçek uygulama kodu** okunarak güncellenmiştir. Wireframe ve yerleşim açıklamalarında ekranda görünen metinler yerine `src/content/copy.ts` anahtarlarıyla uyumlu `[anahtar]` yer tutucuları kullanılmıştır.
 
 ---
 
@@ -11,11 +11,12 @@
 - **Hedef Kitle:** Sert şeker, yumuşak jelibon, çikolata kaplı draje, lolipop/sakız, geleneksel lokum/akide ve tuzlu çıtır atıştırmalık seven son tüketiciler.
 - **Ton:** Yüksek kontrastlı pop-ambalaj estetiği (kalın kakao-bordo konturlar `#2B1410`, blursız sert pop gölgeler, ısı yapıştırmalı poşet zikzakları, yıldız patlaması fiyat rozetleri ve retro OS pencere metaforu).
 - **SEO & Meta Varlıkları:**
-  - `index.html`: `lang="tr"`, `theme-color="#FFF8EE"`, Open Graph (`og:type`, `og:locale="tr_TR"`, `og:image="/og-image.png"` 1200×630) ve `twitter:card="summary_large_image"`.
+  - `index.html`: `lang="tr"`, `theme-color="#FFF8EE"`, `canonical` (`https://lupuk.com.tr/`), Open Graph (`og:type`, `og:locale="tr_TR"`, `og:image="https://lupuk.com.tr/og-image.png"` 1200×630) ve `twitter:card="summary_large_image"`.
   - `public/og-image.png`: Sosyal paylaşım önizleme görseli.
-  - `public/robots.txt`: Tüm tarayıcılara izin (`Allow: /`) ve `Sitemap: /sitemap.xml`.
-  - `public/sitemap.xml`: Ana statik rotalar (`/`, `/shop`, 6 `/shop/:category`, `/mix`, `/about`, `/info`, `/credits`).
+  - `public/robots.txt`: Tüm tarayıcılara izin (`Allow: /`) ve `Sitemap: https://lupuk.com.tr/sitemap.xml`.
+  - `public/sitemap.xml`: Ana statik rotalar (`https://lupuk.com.tr/` altında `/`, `/shop`, 6 `/shop/:category`, `/mix`, `/about`, `/info`, `/credits`).
   - `public/brand/`: `logo-horizontal.svg`, `logo-main.svg`, `logo-mark.svg` (favicon), `logo-mono.svg`.
+  - `public/` ikon & manifest: `favicon-32x32.png`, `apple-touch-icon.png`, `icon-192.png`, `icon-512.png`, `site.webmanifest`.
 
 ---
 
@@ -107,7 +108,7 @@ flowchart TD
 
 ### 3.1. `Header` (`src/components/layout/Header.tsx`)
 
-Sticky (`sticky top-0 z-[var(--z-sticky)]`), üstten yüzen gölgesiz hap çubuk (`h-16 rounded-full pop-border bg-[var(--color-cream-alt)]`).
+Sticky (`sticky top-0 z-[var(--z-sticky)]`), üstten yüzen gölgesiz hap çubuk (`h-16 rounded-full pop-border bg-[var(--color-cream-alt)]`). `320px` dar mobil ekranlara uyum için dış boşluklar `px-2 min-[360px]:px-4`, iç boşluklar `px-2.5 min-[360px]:px-4 sm:px-6`, logo `h-7 min-[360px]:h-8 sm:h-10 w-auto` ve sağ aksiyon aralığı `gap-1 min-[360px]:gap-1.5 sm:gap-2` olarak kademelendirilmiştir. Favori ve sepet butonlarında görünür ikon + sayı korunurken ekran okuyucu bağlamı `sr-only` metin parçalarıyla (`<span className="sr-only">Favorilerim (</span>...<span className="sr-only"> ürün)</span>` ve `<span className="sr-only">Sepeti aç (</span>...<span className="sr-only"> ürün)</span>`) sağlanır.
 
 **Masaüstü (`md` ve üzeri):**
 ```text
@@ -122,7 +123,7 @@ Sticky (`sticky top-0 z-[var(--z-sticky)]`), üstten yüzen gölgesiz hap çubuk
 | [logo-horizontal.svg]              [🔍] [♥ N] [🛍 N] [☰]      |
 +---------------------------------------------------------------+
 ```
-- Mobil menü (`md:hidden`) artık inline açılır div yerine **Radix `Dialog`** (`Dialog.Root` → `Dialog.Portal` → `Dialog.Overlay` + `Dialog.Content`) olarak çalışır; böylece `Esc` tuşu, odak tuzağı (focus trap) ve `[header.mobileNavAria]` erişilebilir başlığı sağlanır:
+- Mobil menü (`md:hidden`) inline açılır div yerine **Radix `Dialog`** (`Dialog.Root` → `Dialog.Portal` → `Dialog.Overlay` + `Dialog.Content`) olarak çalışır; böylece `Esc` tuşu, odak tuzağı (focus trap) ve `[header.mobileNavAria]` erişilebilir başlığı sağlanır:
 ```text
 +---------------------------------------------------------------+
 | [header.mobileNavAria]                                    [✕] |
@@ -139,11 +140,11 @@ Sticky (`sticky top-0 z-[var(--z-sticky)]`), üstten yüzen gölgesiz hap çubuk
 | [header.searchModalTitle]                 [✕] |
 | [ input: header.searchPlaceholder ] [submit]  |
 | +-------------------------------------------+ |
-| | [item.name]  [item.flavor · netWeight] ₺  | | (ilk 5 Fuse.js sonucu)
+| | [item.name]  [item.flavor · netWeight] TL | | (ilk 5 Fuse.js sonucu)
 | +-------------------------------------------+ |
 +-----------------------------------------------+
 ```
-- Katalog boşsa `[header.emptyCatalog]`, sonuç yoksa `[header.noResults]`, form submit edildiğinde `/shop?q=...` rotasına yönlenir.
+- Katalog boşsa `[header.emptyCatalog]`, sonuç yoksa `[header.noResults]`, form submit edildiğinde `/shop?q=...` rotasına yönlenir. Fiyatlar `formatPrice()` üzerinden `TL` birimiyle gösterilir.
 
 ### 3.2. `Footer` (`src/components/layout/Footer.tsx`)
 
@@ -181,12 +182,12 @@ Anti-AI sadeleştirme sonrası `HomePage` **5 ana bölümden** oluşur (eski kla
    - Sol (`lg:col-span-6`): Parti rozeti (`[site.batchCode] · [home.heroBadgeSuffix]`), dev başlık (`--text-hero`: `[home.heroTitleStart]` + serif italik `[home.heroTitleHighlight]` + `[home.heroTitleEnd]`), alt metin (`[home.heroSubtitle]`) ve 2 CTA (`/shop` `[home.heroPrimaryCta]` `pop-shadow`, `/about` kesikli çerçeveli `[home.heroSecondaryCta]`).
    - Sağ (`lg:col-span-6`): `bg-[var(--color-powder-blue)]` + `.halftone-dots` + `pop-shadow-lg` ambalaj vitrini, sağ üstte `-rotate-12` dairesel mühür rozeti (`bg-[var(--color-lime)]`: `[home.sealTop]` / `[home.sealCount]` / `[home.sealBottom]`), üstte `logo-main.svg` + `[home.heroPackCount]` rozeti, altta 3'lü vitrin rafı (`HERO_SHOWCASE`: 3 `/product/:slug` kartı).
 2. **Bölüm 2 — Tam Genişlik Kayan Ticker (`TickerStrip`):**
-   - `bg-[var(--color-butter)]`, üst-alt `2px` kontur, `[ticker.defaultItems]` kesintisiz döngü.
+   - `bg-[var(--color-butter)]`, üst-alt `2px` kontur, `[ticker.defaultItems]` kesintisiz döngü + sağda sabit duraklat/oynat kontrol düğmesi (`▶` / `❚❚`).
 3. **Bölüm 3 — Tek Kategori Gezintisi (`CategoryTabs`):**
    - Başlık (`[home.categoriesTitle]`) + `[home.seeAll]` (`/shop`) linki.
    - Radix `Tabs` (`tumu` + 6 kategori) → seçili sekmenin ilk 4 ürünü 4 sütunlu `PackCard` ızgarasında (`sm:grid-cols-2 lg:grid-cols-4`).
-4. **Bölüm 4 — Tam Genişlik Öne Çıkan Paketler Karuseli (`Embla`):**
-   - `bg-[var(--color-cream-alt)] border-y-2 border-[var(--color-ink)]`.
+4. **Bölüm 4 — Tam Genişlik Öne Çıkan Paketler Karuseli (`FeaturedCarousel`):**
+   - `lazy()` + `Suspense` (`FeaturedCarouselFallback`) ile yüklenen `src/components/home/FeaturedCarousel.tsx` bileşeni (`bg-[var(--color-cream-alt)] border-y-2 border-[var(--color-ink)]`).
    - Başlık (`[home.carouselTitle]`) + `←` / `→` butonları + `products.filter(p => p.featured).slice(0, 8)` `PackCard` karuseli + ilerleme çubuğu + `[home.carouselMore]` (`/shop`).
 5. **Bölüm 5 — Dama Bandı + Retro OS Diyalog & Tezgâh Notu:**
    - Tam genişlik `h-10 pop-checker-band`.
@@ -234,10 +235,11 @@ Anti-AI sadeleştirme sonrası `HomePage` **5 ana bölümden** oluşur (eski kla
 
 ### 4.4. `ProductDetailPage` (`src/pages/ProductDetailPage.tsx`, `/product/:slug`)
 
-- **Breadcrumb:** `[common.home]` / `[common.shop]` / `[category.name]` / `[product.name]`
+- **Breadcrumb:** `flex flex-nowrap items-center gap-2 overflow-x-auto whitespace-nowrap` (`min-h-[44px]` tek satır, yatay kaydırmalı düzen): `[common.home]` / `[common.shop]` / `[category.name]` / `[product.name]`
 - **Ana 2 Sütun (`lg:grid-cols-12`):**
-  - Sol (`order-2 lg:order-1`): `h1` başlık, alt başlık, fiyat, açıklama, varsa `flavors` renkli hap seçicisi, adet (`-/+`) + `motion.button` `[pdp.addToCart]` (`pop-shadow`) + favori kalp butonu, besin etiketi görünümlü bilgi paneli (`[pdp.nutritionTitle]`: `[pdp.batchCodeLabel]`, `[pdp.flavorStripLabel]`, `[pdp.ingredientsLabel]`, `[pdp.allergensLabel]`) ve Radix `Accordion` (3 panel: `[pdp.accordionIngredients]`, `[pdp.accordionAllergens]`, `[pdp.accordionStorage]`).
-  - Sağ (`order-1 lg:order-2`): `ZigzagEdge` + kesikli yırtma çizgisi + `StarburstBadge` (`size="lg"`) + `FlavorStripe` + `NetWeightTag` + kare görsel çerçevesi (`.halftone-dots`, `pop-shadow-lg`) + çoklu görsel varsa küçük görsel şeridi.
+  - Bilgi Sütunu (`order-2 lg:order-1`, mobilde görselin altında): `h1` başlık, alt başlık, fiyat, açıklama, varsa `flavors` renkli hap seçicisi, adet (`-/+`) + `[pdp.addToCart]` (`pop-shadow pop-spring`, tıklandığında geçici `'Eklendi'` durumu) + favori kalp butonu, besin etiketi görünümlü bilgi paneli (`[pdp.nutritionTitle]`: `[pdp.batchCodeLabel]`, `[pdp.flavorStripLabel]`, `[pdp.ingredientsLabel]`, `[pdp.allergensLabel]`) ve `h2.sr-only` (`Ürün Ayrıntıları`) altında Radix `Accordion` (3 panel: `[pdp.accordionIngredients]`, `[pdp.accordionAllergens]`, `[pdp.accordionStorage]`).
+  - Görsel Sütunu (`order-1 lg:order-2`, mobilde üstte): `ZigzagEdge` + `FlavorStripe` + `NetWeightTag` + kare görsel çerçevesi (`.halftone-dots`, `pop-shadow-lg`, `ProductImage` `priority`) + `StarburstBadge` (`size="lg"`) + çoklu görsel varsa küçük görsel şeridi.
+- **Mobil Sabit Alt Çubuk (`lg:hidden fixed bottom-0`):** Fiyat, ürün adı (`truncate`) ve `[pdp.addToCart]` butonu (sayfa altında `pb-24 lg:pb-10` boşluğu bırakılır).
 - **Benzer Ürünler:** `[pdp.relatedTitle]` altında `getRelatedProducts(product, 4)` → 4 sütunlu `PackCard` ızgarası.
 - **Bulunamayan Ürün:** `EmptyStateIllustration` (`variant="torn-bag"`) + `[pdp.notFoundTitle]` + `[common.backToShop]`.
 
@@ -282,13 +284,15 @@ Anti-AI sadeleştirme sonrası 2 bölümden oluşur:
 
 | Bileşen | Dosya Yolu | Görsel Rol & Anatomi |
 | :--- | :--- | :--- |
-| `PackCard` | `src/components/packaging/PackCard.tsx` | Ana ürün ambalaj kartı: `ZigzagEdge` + `[common.tearHere]` çentiği + `StarburstBadge` + `FlavorStripe` + `NetWeightTag` + `.halftone-dots` kare görsel (`-400.webp` / `srcSet`) + başlık/alt başlık + parti kodu/stok durumu + favori & sepet butonları |
+| `PackCard` | `src/components/packaging/PackCard.tsx` | Ana ürün ambalaj kartı: `ZigzagEdge` + `StarburstBadge` + `FlavorStripe` + `NetWeightTag` + `.halftone-dots` kare görsel (`ProductImage`, `-400.webp` / `srcSet`) + başlık/alt başlık + parti kodu/stok durumu + favori & sepet butonları |
+| `ProductImage` | `src/components/packaging/ProductImage.tsx` | Ortak ürün görseli bileşeni: `.webp` yollarından otomatik `-400.webp` + `400w, 800w` `srcSet` üretir, `priority` (`eager`/`fetchPriority="high"`) veya `lazy` yükler, kırık/boş görselde SVG yer tutucu (`[common.imagePlaceholder]`) gösterir |
+| `FeaturedCarousel` | `src/components/home/FeaturedCarousel.tsx` | `HomePage` için `lazy()` ile yüklenen Embla tabanlı öne çıkan paketler karuseli (`←`/`→` kontrolleri, `PackCard` rayı, canlı ilerleme çubuğu) |
 | `ZigzagEdge` | `src/components/packaging/ZigzagEdge.tsx` | Poşet, sepet fişi ve karışım tepsisi üstündeki dışa taşan SVG ısı yapıştırma zikzak şeridi |
 | `StarburstBadge` | `src/components/packaging/StarburstBadge.tsx` | 20 köşeli sarı (`#FFD447`) yıldız patlaması fiyat rozeti (`md` 76px / `lg` 86px, `-rotate-6`) |
 | `FlavorStripe` | `src/components/packaging/FlavorStripe.tsx` | Kategori renginde ve kontrast mürekkep renginde yuvarlak aroma şeridi etiketi (`h-7`) |
 | `NetWeightTag` | `src/components/packaging/NetWeightTag.tsx` | Mono fontlu teknik gramaj etiketi (`[common.netPrefix]{weight}`, `h-6`) |
 | `EmptyStateIllustration` | `src/components/packaging/EmptyStateIllustration.tsx` | 4 varyantlı satır içi SVG illüstrasyon: `empty-bag`, `torn-bag`, `no-results`, `order-seal` |
-| `TickerStrip` | `src/components/packaging/TickerStrip.tsx` | Sarı zeminli sürekli kayan mono duyuru şeridi (`★` ayırıcılarla) |
+| `TickerStrip` | `src/components/packaging/TickerStrip.tsx` | Sarı zeminli sürekli kayan mono duyuru şeridi (`★` ayırıcılar ve sağda `[ticker.pauseLabel]` / `[ticker.playLabel]` duraklatma düğmesi) |
 | `CategoryTabs` | `src/components/packaging/CategoryTabs.tsx` | Radix `Tabs` tabanlı, seçili kategori rengine bürünen hap sekme çubuğu |
 | `RetroDialog` | `src/components/packaging/RetroDialog.tsx` | Pudra mavisi başlık çubuklu, 2 pencere noktalı ve etkileşimli seçenek butonlu retro OS pencere kartı (`pop-shadow-lg`) |
 | `CartDrawer` | `src/components/packaging/CartDrawer.tsx` | Radix `Dialog` tabanlı sağdan kayan sepet çekmecesi |
@@ -298,18 +302,18 @@ Anti-AI sadeleştirme sonrası 2 bölümden oluşur:
 ## 6. Bileşen Ağacı
 
 ```text
-App (MotionConfig reducedMotion="user" → BrowserRouter → Suspense)
+App (BrowserRouter → Suspense)
 └── SiteLayout
     ├── SkipLink (#main-content)
     ├── Header
     │   ├── Radix Dialog (Arama Modalı → useProductSearch / Fuse.js)
     │   └── Radix Dialog (Mobil Menü)
     ├── main#main-content (Outlet)
-    │   ├── HomePage → TickerStrip, CategoryTabs (PackCard), Embla Carousel (PackCard), RetroDialog
+    │   ├── HomePage → ProductImage, TickerStrip, CategoryTabs (PackCard), FeaturedCarousel (lazy, PackCard), RetroDialog
     │   ├── ShopPage → Radix Slider, Radix Select, PackCard, EmptyStateIllustration
-    │   ├── MixPage → ZigzagEdge
-    │   ├── ProductDetailPage → ZigzagEdge, StarburstBadge, FlavorStripe, NetWeightTag, Radix Accordion, PackCard, EmptyStateIllustration
-    │   ├── CartPage → EmptyStateIllustration, ZigzagEdge
+    │   ├── MixPage → ProductImage, ZigzagEdge
+    │   ├── ProductDetailPage → ProductImage, ZigzagEdge, StarburstBadge, FlavorStripe, NetWeightTag, Radix Accordion, PackCard, EmptyStateIllustration
+    │   ├── CartPage → ProductImage, EmptyStateIllustration, ZigzagEdge
     │   ├── CheckoutPage → EmptyStateIllustration, triggerAddToCartConfetti
     │   ├── AboutPage
     │   ├── InfoPage → Radix Accordion
@@ -323,15 +327,21 @@ App (MotionConfig reducedMotion="user" → BrowserRouter → Suspense)
 
 ## 7. Tasarım Sistemi Özeti
 
-### 7.1. Tipografi (`index.html` + `src/styles/tokens.css`)
+Tasarım tokenları `src/styles/tokens.css` barrel dosyası üzerinden 4 modüler dosyada yönetilir:
+- `src/styles/tokens.color.css`: Zemin, mürekkep, pop renk paleti, 6 kategori rengi, anlamsal renkler, kontur/gölge ve desen renk tokenları.
+- `src/styles/tokens.typography.css`: `@theme` içinde 4 font ailesi, metin ölçekleri (`--text-xs`–`--text-footer-wordmark`), satır yükseklikleri ve harf aralıkları.
+- `src/styles/tokens.spacing.css`: Köşe yarıçapları, boşluk ölçeği (`--space-1`–`--space-12`), `--container-max: 1280px` ve ambalaj ölçü tokenları (`--zigzag-tooth-*`, `--badge-star-size`, vb.).
+- `src/styles/tokens.motion.css`: `--ease-pop`, `--duration-fast` (`140ms`), `--duration-base` (`220ms`) ve katman (`--z-*`) tokenları.
+
+### 7.1. Tipografi (`index.html` + `src/styles/tokens.typography.css`)
 - **4 Google Fonts Ailesi:**
-  - `--font-display`: `'Fredoka', ui-rounded, system-ui, sans-serif` (başlıklar, CTA'lar, nav hapları)
-  - `--font-body`: `'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif` (gövde metni)
-  - `--font-serif`: `'Fraunces', Georgia, serif` (`.font-serif-accent`, italik vurgu kelimeleri)
-  - `--font-mono`: `'DM Mono', ui-monospace, monospace` (`.font-mono-spec`, parti kodları, gramaj, etiketler)
+  - `--font-display`: `'Baloo 2', ui-rounded, system-ui, -apple-system, sans-serif` (başlıklar, CTA'lar, nav hapları)
+  - `--font-body`: `'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif` (gövde metni)
+  - `--font-serif`: `'Fraunces', Georgia, 'Times New Roman', serif` (`.font-serif-accent`, italik vurgu kelimeleri)
+  - `--font-mono`: `'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace` (`.font-mono-spec`, parti kodları, gramaj, etiketler)
 - **Önemli Ölçek Tokenları:** `--text-hero: clamp(2.75rem, 6vw, 4.75rem)`, `--text-footer-wordmark: clamp(5rem, 18vw, 15rem)`.
 
-### 7.2. Renk Paleti ve 6 Kategori Rengi (`src/styles/tokens.css`)
+### 7.2. Renk Paleti ve 6 Kategori Rengi (`src/styles/tokens.color.css`)
 - **Zemin & Kontrast:** `--color-cream` (`#FFF8EE`), `--color-cream-alt` (`#FDF1DF`), `--color-white` (`#FFFFFF`), `--color-ink` (`#2B1410`), `--color-ink-soft` (`#4A231E`).
 - **Pop Vurgular:** `--color-tomato` (`#C8281C`), `--color-pink` (`#FF6FA8`), `--color-butter` (`#FFD447`), `--color-powder-blue` (`#8ECAE6`), `--color-deep-blue` (`#1E4DD8`), `--color-lime` (`#9AE63B`), `--color-tangerine` (`#FF7A22`), `--color-lavender` (`#C9A7FF`), `--color-cocoa` (`#6E352C`).
 - **Kategori Tokenları:**
@@ -358,11 +368,10 @@ App (MotionConfig reducedMotion="user" → BrowserRouter → Suspense)
 
 | Öğe / Bileşen | Tetikleyici | Davranış / Hareket | İlgili Dosya |
 | :--- | :--- | :--- | :--- |
-| Global Hareket Politikası | Sistem tercihi | `MotionConfig reducedMotion="user"` ile `prefers-reduced-motion` uyumu | `src/App.tsx` |
-| `PackCard` | Hover (`whileHover`) | `y: -4` yaylı yükselme (`stiffness: 420, damping: 24`) | `src/components/packaging/PackCard.tsx` |
-| `ProductDetailPage` CTA | Tap (`whileTap`) | `scale: 0.96` basılma tepkisi (stokta varsa) | `src/pages/ProductDetailPage.tsx` |
-| `TickerStrip` | Sürekli | CSS `@keyframes ticker-scroll` (28s linear infinite, hover'da duraklar) | `src/index.css`, `TickerStrip.tsx` |
-| Öne Çıkanlar Karuseli | Ok butonları / Kaydırma | Embla Carousel kaydırma ve canlı ilerleme çubuğu (`scrollProgress`) | `src/pages/HomePage.tsx` |
+| `PackCard` | Hover (`hover:-translate-y-1`) | CSS `--duration-fast` (`140ms`) + `--ease-pop` yükselme (`motion-reduce:transition-none`) | `src/components/packaging/PackCard.tsx` |
+| `ProductDetailPage` CTA | Tap (`active:scale-[0.96]`) | CSS basılma tepkisi + `pop-spring` hover yükselmesi (`disabled` iken pasif) | `src/pages/ProductDetailPage.tsx` |
+| `TickerStrip` | Sürekli / Düğme | CSS `.animate-ticker` (28s linear infinite); `focus-within` veya sağdaki duraklat/oynat düğmesi (`data-paused="true"`) ile duraklar | `src/index.css`, `TickerStrip.tsx` |
+| `FeaturedCarousel` | Ok butonları / Kaydırma | Embla Carousel kaydırma ve canlı ilerleme çubuğu (`scrollProgress`) | `src/components/home/FeaturedCarousel.tsx` |
 | Demo Sipariş Onayı | Form submit (`CheckoutPage`) | `triggerAddToCartConfetti()` (24 parçacık, 6 marka rengi) | `src/lib/confetti.ts`, `CheckoutPage.tsx` |
 | Radix Bileşenleri | Tıklama / Klavye | `Dialog` (Arama, Mobil Menü, CartDrawer), `Tabs`, `Slider`, `Select`, `Accordion` | `Header.tsx`, `CartDrawer.tsx`, `ShopPage.tsx`, `ProductDetailPage.tsx`, `InfoPage.tsx` |
 
@@ -412,7 +421,7 @@ App (MotionConfig reducedMotion="user" → BrowserRouter → Suspense)
 | `react` / `react-dom` | `^19.2.0` | Çekirdek UI kütüphanesi |
 | `react-router-dom` | `^7.18.5` | İstemci taraflı yönlendirme ve URL arama parametreleri |
 | `zustand` | `^5.1.0` | Kalıcı sepet ve favori durum yönetimi (`lupuk-cart-v1`) |
-| `framer-motion` | `^14.14.0` | `MotionConfig` ve kart/buton mikro etkileşimleri |
+| `framer-motion` | `^14.14.0` | `package.json` bağımlılığı (güncel bileşenler CSS `--ease-pop` / `--duration-fast` geçişlerini kullanır) |
 | `embla-carousel-react` | `^8.6.0` | `HomePage` öne çıkan paketler karuseli |
 | `fuse.js` | `^7.5.0` | Bulanık (fuzzy) ürün arama |
 | `lucide-react` | `^1.73.0` | Arayüz ikonları |
@@ -432,6 +441,4 @@ App (MotionConfig reducedMotion="user" → BrowserRouter → Suspense)
 
 1. **Katalogdaki İçerik Boşlukları (`src/data/products.js`):** Bazı ürünlerde `ingredients`, `allergens` veya `storage` alanları boş bırakıldığında arayüz `[common.toBeAdded]` / `[pdp.defaultStorage]` yedek metinlerini gösterir.
 2. **`InfoPage` Teslimat/İade Metinleri (`src/content/copy.ts`):** `[info.deliveryText]` ve `[info.returnsText]` alanları henüz nihai lojistik bilgisi yerine yer tutucu ifade içerir.
-3. **`HomePage` Hero Vitrin Görselleri (`src/pages/HomePage.tsx`):** `HERO_SHOWCASE` küçük kartları `-400.webp` yerine doğrudan 800×800 `.webp` dosyalarını kullanır (buna karşılık `PackCard` ve `CartDrawer` `-400.webp` + `srcSet` kullanır).
-4. **Demo Ödeme Akışı (`src/pages/CheckoutPage.tsx`):** Gerçek ödeme sağlayıcısı veya sunucu siparişi yoktur; yalnızca istemci tarafı form doğrulaması yapar.
-5. **Göreli Sitemap URL'leri (`public/sitemap.xml` & `public/robots.txt`):** `sitemap.xml` içindeki `<loc>` değerleri ve `robots.txt` `Sitemap:` satırı göreli yol (`/shop` vb.) kullanır; üretim alan adı bağlandığında tam `https://...` URL'lerine güncellenmesi gerekir.
+3. **Demo Ödeme Akışı (`src/pages/CheckoutPage.tsx`):** Gerçek ödeme sağlayıcısı veya sunucu siparişi yoktur; yalnızca istemci tarafı form doğrulaması yapar.

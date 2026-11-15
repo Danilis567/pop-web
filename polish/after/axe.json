@@ -1,0 +1,12 @@
+{
+  "generatedAt": "2026-11-14T19:58:18.149Z",
+  "baseUrl": "http://localhost:4180",
+  "summary": {
+    "scans": 30,
+    "violationEntries": 0,
+    "criticalViolations": 0,
+    "seriousViolations": 0,
+    "nodesByRule": {}
+  },
+  "violations": []
+}

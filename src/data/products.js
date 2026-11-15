@@ -63,7 +63,7 @@ export const products = [
       'Kırmızı vişne ve sarı limon yarımları aynı gövdede. Önce ekşi, sonra tatlı.',
     category: 'sert-seker',
     price: 54,
-    netWeight: '140g',
+    netWeight: '140\u00A0g',
     batchCode: 'PARTİ #26-01',
     flavor: 'VİŞNE LİMON',
     flavors: [
@@ -89,7 +89,7 @@ export const products = [
       'Yeşil ve beyaz çizgili sert taneler. Ağızda serin nane ve okaliptüs tadı bırakır.',
     category: 'sert-seker',
     price: 48,
-    netWeight: '120g',
+    netWeight: '120\u00A0g',
     batchCode: 'PARTİ #26-02',
     flavor: 'NANE OKALİPTÜS',
     flavors: [
@@ -115,7 +115,7 @@ export const products = [
       'Portakal dilimi biçiminde sert şeker. Dışındaki iri şeker kristalleri hafif pütürlüdür.',
     category: 'sert-seker',
     price: 58,
-    netWeight: '150g',
+    netWeight: '150\u00A0g',
     batchCode: 'PARTİ #26-03',
     flavor: 'PORTAKAL DİLİMİ',
     flavors: [
@@ -141,7 +141,7 @@ export const products = [
       'Kehribar rengi sert karamelin üstünde iri deniz tuzu taneleri var. Tatlı ve tuzlu bir arada.',
     category: 'sert-seker',
     price: 67,
-    netWeight: '140g',
+    netWeight: '140\u00A0g',
     batchCode: 'PARTİ #26-04',
     flavor: 'TUZLU KARAMEL',
     flavors: [
@@ -169,7 +169,7 @@ export const products = [
       'Sarı ve turuncu halka jelibonların dışı ekşi şekerle kaplı. Yumuşak ve kolay çiğnenir.',
     category: 'jelibon',
     price: 62,
-    netWeight: '150g',
+    netWeight: '150\u00A0g',
     batchCode: 'PARTİ #26-05',
     flavor: 'EKŞİ ŞEFTALİ',
     flavors: [
@@ -195,7 +195,7 @@ export const products = [
       'Yarı saydam, esnek ayıcık jelibonlar. Kırmızı ve mor renklerde orman meyvesi tadında.',
     category: 'jelibon',
     price: 59,
-    netWeight: '160g',
+    netWeight: '160\u00A0g',
     batchCode: 'PARTİ #26-06',
     flavor: 'ORMAN MEYVELERİ',
     flavors: [
@@ -222,7 +222,7 @@ export const products = [
       'İnce kıvrımlı yeşil şeritlerin üzeri ekşi şeker kaplı. Elma ve kivi aromalı.',
     category: 'jelibon',
     price: 64,
-    netWeight: '140g',
+    netWeight: '140\u00A0g',
     batchCode: 'PARTİ #26-07',
     flavor: 'ELMA KİVİ',
     flavors: [
@@ -248,7 +248,7 @@ export const products = [
       'Üstü parlak çilek jölesi, altı beyaz köpük taban. Yumuşak ve tatlı bir çift kat.',
     category: 'jelibon',
     price: 69,
-    netWeight: '150g',
+    netWeight: '150\u00A0g',
     batchCode: 'PARTİ #26-08',
     flavor: 'ÇİLEK KREMA',
     flavors: [
@@ -276,7 +276,7 @@ export const products = [
       'Dışı kakao tozu kaplı yuvarlak çikolata topları. İçinde kavrulmuş fındık parçaları var.',
     category: 'cikolata-kapli',
     price: 118,
-    netWeight: '150g',
+    netWeight: '150\u00A0g',
     batchCode: 'PARTİ #26-09',
     flavor: 'FINDIK KAKAO',
     flavors: [
@@ -302,7 +302,7 @@ export const products = [
       'Koyu çikolata kaplı badem ve pralin parçaları. Kahvenin yanında tek tek yemelik.',
     category: 'cikolata-kapli',
     price: 128,
-    netWeight: '160g',
+    netWeight: '160\u00A0g',
     batchCode: 'PARTİ #26-10',
     flavor: 'BİTTER BADEM',
     flavors: [
@@ -328,7 +328,7 @@ export const products = [
       'İnce çikolata kabuğunun içinde bütün kahve çekirdeği. Isırınca çıtırdayarak kırılır.',
     category: 'cikolata-kapli',
     price: 105,
-    netWeight: '120g',
+    netWeight: '120\u00A0g',
     batchCode: 'PARTİ #26-11',
     flavor: 'KAHVE ÇİKOLATA',
     flavors: [
@@ -354,7 +354,7 @@ export const products = [
       'Beyaz çikolata kaplamalı yuvarlak trüf. Üzerindeki kuru ahududu kırıkları hafif ekşidir.',
     category: 'cikolata-kapli',
     price: 112,
-    netWeight: '130g',
+    netWeight: '130\u00A0g',
     batchCode: 'PARTİ #26-12',
     flavor: 'AHUDUDU BEYAZ',
     flavors: [
@@ -382,7 +382,7 @@ export const products = [
       'Renkli spiral halkalı büyük sert lolipop. Karışık meyve tadında.',
     category: 'lolipop-sakiz',
     price: 45,
-    netWeight: '85g',
+    netWeight: '85\u00A0g',
     batchCode: 'PARTİ #26-13',
     flavor: 'KARIŞIK MEYVE',
     flavors: [
@@ -409,7 +409,7 @@ export const products = [
       'Kırmızı kalp şeklinde çubuklu sert şeker. Yoğun vişne aromalı.',
     category: 'lolipop-sakiz',
     price: 42,
-    netWeight: '70g',
+    netWeight: '70\u00A0g',
     batchCode: 'PARTİ #26-14',
     flavor: 'VİŞNE',
     flavors: [{ label: 'Vişne', color: '#C8281C' }],
@@ -432,7 +432,7 @@ export const products = [
       'Kırmızı ve beyaz çizgili spiral lolipop. Çilek ve vanilya notalı sert şeker.',
     category: 'lolipop-sakiz',
     price: 46,
-    netWeight: '80g',
+    netWeight: '80\u00A0g',
     batchCode: 'PARTİ #26-15',
     flavor: 'ÇİLEK VANİLYA',
     flavors: [
@@ -458,7 +458,7 @@ export const products = [
       'İnce beyaz kabuklu yastık sakız taneleri. İlk ısırıkta hafifçe çıtırdar, hemen yumuşar.',
     category: 'lolipop-sakiz',
     price: 39,
-    netWeight: '90g',
+    netWeight: '90\u00A0g',
     batchCode: 'PARTİ #26-16',
     flavor: 'MEYVELİ SAKIZ',
     flavors: [
@@ -486,7 +486,7 @@ export const products = [
       'İçi bütün Antep fıstığı dolu yumuşak rulo lokum dilimleri. Dışı ince pudra şekerli.',
     category: 'geleneksel',
     price: 135,
-    netWeight: '200g',
+    netWeight: '200\u00A0g',
     batchCode: 'PARTİ #26-17',
     flavor: 'ANTEP FISTIĞI',
     flavors: [{ label: 'Antep Fıstığı', color: '#9AE63B' }],
@@ -509,7 +509,7 @@ export const products = [
       'Nar aromalı lokum çubukları. Dış yüzeyi kuru gül yaprakları ve fıstık kırıklarıyla kaplı.',
     category: 'geleneksel',
     price: 142,
-    netWeight: '200g',
+    netWeight: '200\u00A0g',
     batchCode: 'PARTİ #26-18',
     flavor: 'NAR GÜL YAPRAĞI',
     flavors: [
@@ -535,7 +535,7 @@ export const products = [
       'Parlak ve köşeli akide şekeri taneleri. Portakal, limon ve böğürtlen aromalı.',
     category: 'geleneksel',
     price: 74,
-    netWeight: '180g',
+    netWeight: '180\u00A0g',
     batchCode: 'PARTİ #26-19',
     flavor: 'KARIŞIK AKİDE',
     flavors: [
@@ -562,7 +562,7 @@ export const products = [
       'İnce karamel tutturulmuş altın susam topları. Dişe yapışmayan gevrek kıvamda.',
     category: 'geleneksel',
     price: 89,
-    netWeight: '140g',
+    netWeight: '140\u00A0g',
     batchCode: 'PARTİ #26-20',
     flavor: 'SUSAM KROKAN',
     flavors: [
@@ -590,7 +590,7 @@ export const products = [
       'İri taneli, gevrek kavrulmuş mısır. İnce tuz kaplamasıyla yüksek sesli kıtırlık.',
     category: 'tuzlu-atistirmalik',
     price: 52,
-    netWeight: '140g',
+    netWeight: '140\u00A0g',
     batchCode: 'PARTİ #26-21',
     flavor: 'TUZLU MISIR',
     flavors: [{ label: 'Kavrulmuş Mısır', color: '#FFD447' }],
@@ -613,7 +613,7 @@ export const products = [
       'Düğüm formunda fırınlanmış mini krakerler. Üzerindeki iri deniz tuzu taneleri belirgin.',
     category: 'tuzlu-atistirmalik',
     price: 56,
-    netWeight: '150g',
+    netWeight: '150\u00A0g',
     batchCode: 'PARTİ #26-22',
     flavor: 'DENİZ TUZU',
     flavors: [
@@ -639,7 +639,7 @@ export const products = [
       'Kuru kavrulmuş nohut taneleri. Ağızda dağılmadan tek seferde kırılır.',
     category: 'tuzlu-atistirmalik',
     price: 49,
-    netWeight: '160g',
+    netWeight: '160\u00A0g',
     batchCode: 'PARTİ #26-23',
     flavor: 'TUZLU NOHUT',
     flavors: [{ label: 'Kavrulmuş Nohut', color: '#FFD447' }],
@@ -662,7 +662,7 @@ export const products = [
       'İnce karamel levha içinde bütün bademler. Sert ve cam gibi kırılan tuzlu karamel.',
     category: 'tuzlu-atistirmalik',
     price: 94,
-    netWeight: '130g',
+    netWeight: '130\u00A0g',
     batchCode: 'PARTİ #26-24',
     flavor: 'TUZLU BADEM KROKAN',
     flavors: [

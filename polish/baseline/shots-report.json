@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:4180",
+  "outDir": "polish\\baseline\\shots",
+  "totalShots": 45,
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failed404": []
+}

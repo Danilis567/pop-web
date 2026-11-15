@@ -9,7 +9,7 @@ export default function AboutPage() {
   const categories = getCategories();
 
   return (
-    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-12 space-y-16">
+    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-16">
       {/* Editöryal / Asimetrik Üst Bölüm */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
         <div className="lg:col-span-7 space-y-5">
@@ -44,7 +44,7 @@ export default function AboutPage() {
               </div>
               <div className="space-y-1">
                 <img src="/brand/logo-horizontal.svg" alt={COPY.about.logoAlt} className="h-9 w-auto mx-auto" />
-                <p className="font-serif-accent text-base text-[var(--color-ink)]">
+                <p className="font-serif-accent font-semibold text-base text-[var(--color-ink)]">
                   {COPY.about.showcaseCaption}
                 </p>
               </div>

@@ -1,0 +1,28 @@
+/* ==========================================================================
+   Lüpük — Tipografi Tokenları (W1)
+   ========================================================================== */
+
+@theme {
+  --font-display: 'Baloo 2', ui-rounded, system-ui, -apple-system, sans-serif;
+  --font-body: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs: 0.75rem;      /* 12px - mono parti kodu, gramaj */
+  --text-sm: 0.875rem;     /* 14px - etiket, breadcrumb */
+  --text-base: 1rem;       /* 16px - gövde */
+  --text-lg: 1.125rem;     /* 18px - alt başlık, kart başlığı */
+  --text-xl: 1.375rem;     /* 22px - bölüm alt başlığı */
+  --text-2xl: 1.875rem;    /* 30px - bölüm başlığı */
+  --text-3xl: 2.5rem;      /* 40px - vitrin başlığı */
+  --text-hero: clamp(2.75rem, 6vw, 4.75rem);
+  --text-footer-wordmark: clamp(5rem, 18vw, 15rem);
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.5;
+
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.04em;
+  --tracking-widest: 0.1em;
+}

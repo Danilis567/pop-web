@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:4180",
+  "outDir": "polish/after/shots",
+  "totalShots": 45,
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "failed404": []
+}

@@ -23,6 +23,7 @@ export function ZigzagEdge({ color, className = '' }: ZigzagEdgeProps) {
             stroke="var(--color-ink)"
             strokeWidth="2"
             strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
             points="1,14 1,10 8,2 16,10 24,2 32,10 40,2 48,10 56,2 64,10 72,2 80,10 88,2 96,10 104,2 112,10 120,2 128,10 136,2 144,10 152,2 159,10 159,14"
           />
         </svg>

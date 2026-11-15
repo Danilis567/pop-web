@@ -5,7 +5,7 @@ export default function CreditsPage() {
   usePageMeta(COPY.credits.metaTitle, COPY.credits.metaDescription);
 
   return (
-    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-10 space-y-8">
+    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-8">
       <div className="space-y-3 max-w-3xl border-b-2 border-[var(--color-ink)] pb-5">
         <h1 className="font-display font-bold text-4xl sm:text-5xl">
           {COPY.credits.title}

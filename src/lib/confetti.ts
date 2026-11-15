@@ -1,5 +1,3 @@
-import confetti from 'canvas-confetti';
-
 const BRAND_CONFETTI_COLORS = [
   '#C8281C',
   '#FFD447',
@@ -11,7 +9,7 @@ const BRAND_CONFETTI_COLORS = [
 
 /**
  * Fires a light brand-colored confetti burst when motion is allowed.
- * Respects `prefers-reduced-motion: reduce`.
+ * Respects `prefers-reduced-motion: reduce` and lazy-loads `canvas-confetti`.
  */
 export function triggerAddToCartConfetti(sourceEl?: HTMLElement | null): void {
   if (typeof window === 'undefined') return;
@@ -28,15 +26,17 @@ export function triggerAddToCartConfetti(sourceEl?: HTMLElement | null): void {
     };
   }
 
-  void confetti({
-    particleCount: 24,
-    spread: 55,
-    startVelocity: 24,
-    gravity: 0.9,
-    ticks: 90,
-    scalar: 0.8,
-    colors: BRAND_CONFETTI_COLORS,
-    origin,
-    disableForReducedMotion: true,
+  void import('canvas-confetti').then(({ default: confetti }) => {
+    void confetti({
+      particleCount: 24,
+      spread: 55,
+      startVelocity: 24,
+      gravity: 0.9,
+      ticks: 90,
+      scalar: 0.8,
+      colors: BRAND_CONFETTI_COLORS,
+      origin,
+      disableForReducedMotion: true,
+    });
   });
 }

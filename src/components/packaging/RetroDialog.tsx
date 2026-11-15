@@ -18,32 +18,32 @@ export function RetroDialog({
   const [choice, setChoice] = useState<string | null>(null);
 
   return (
-    <div className="bg-[var(--color-cream-alt)] pop-border rounded-[var(--radius-card)] pop-shadow-lg overflow-hidden max-w-md w-full">
+    <div className="bg-[var(--bg-surface)] pop-border rounded-[var(--radius-card)] pop-shadow-lg overflow-hidden max-w-md w-full">
       {/* Retro OS Pencere Başlık Çubuğu */}
       <div className="flex items-center justify-between px-4 py-2.5 bg-[var(--color-powder-blue)] border-b-2 border-[var(--color-ink)]">
-        <span className="font-mono-spec text-xs font-medium text-[var(--color-ink)]">
+        <span className="font-mono-spec text-xs font-medium text-[var(--text-primary)]">
           {title}
         </span>
         <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="w-3 h-3 rounded-full border-2 border-[var(--color-ink)] bg-[var(--color-butter)]" />
+          <span className="w-3 h-3 rounded-full border-2 border-[var(--color-ink)] bg-[var(--accent-highlight)]" />
           <span className="w-3 h-3 rounded-full border-2 border-[var(--color-ink)] bg-[var(--color-pink)]" />
         </div>
       </div>
 
       {/* İçerik */}
       <div className="p-6 space-y-5">
-        <p className="font-display font-semibold text-xl leading-snug text-[var(--color-ink)]">
+        <p className="font-display font-semibold text-xl leading-snug text-[var(--text-primary)]">
           {question}
         </p>
 
         {choice ? (
-          <div className="p-3 rounded-[var(--radius-sm)] pop-border bg-[var(--color-lime)] flex items-center justify-between gap-3">
+          <div className="p-3 rounded-[var(--radius-sm)] pop-border bg-[var(--color-lime)] text-[var(--text-primary)] flex items-center justify-between gap-3">
             <span className="font-display font-medium text-sm">
               {COPY.retroDialog.choiceReceived(choice)}
             </span>
             <Link
               to="/shop"
-              className="px-3 py-1.5 rounded-full pop-border bg-[var(--color-cream)] font-display font-semibold text-xs whitespace-nowrap"
+              className="min-h-[44px] inline-flex items-center px-3 py-1.5 rounded-full pop-border bg-[var(--bg-page)] text-[var(--text-primary)] font-display font-semibold text-xs whitespace-nowrap"
             >
               {COPY.retroDialog.goToShopCta}
             </Link>
@@ -53,14 +53,15 @@ export function RetroDialog({
             <button
               type="button"
               onClick={() => setChoice(primaryLabel)}
-              className="px-5 py-2.5 rounded-full pop-border bg-[var(--color-cream)] hover:bg-[var(--color-butter)] font-display font-semibold text-sm cursor-pointer transition-colors"
+              className="px-5 py-2.5 rounded-full pop-border bg-[var(--bg-page)] hover:bg-[var(--accent-highlight)] text-[var(--text-primary)] font-display font-semibold text-sm cursor-pointer transition-colors"
             >
               {primaryLabel}
             </button>
             <button
               type="button"
+              data-surface="dark"
               onClick={() => setChoice(secondaryLabel)}
-              className="px-5 py-2.5 rounded-full pop-border bg-[var(--color-tomato)] text-[var(--color-cream)] hover:opacity-95 font-display font-semibold text-sm cursor-pointer transition-opacity"
+              className="px-5 py-2.5 rounded-full pop-border bg-[var(--accent-primary)] text-[var(--color-cream)] hover:opacity-95 font-display font-semibold text-sm cursor-pointer transition-opacity"
             >
               {secondaryLabel}
             </button>

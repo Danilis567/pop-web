@@ -61,12 +61,11 @@ export default function ShopPage() {
     const minParam = Math.min(maxCatalogPrice, parseNum(searchParams.get('min'), 0));
     const maxParam = Math.max(minParam, Math.min(maxCatalogPrice, parseNum(searchParams.get('max'), maxCatalogPrice)));
 
-    if (qParam !== query) setQuery(qParam);
+    setQuery((prev) => (prev === qParam ? prev : qParam));
     setFavOnly(favParam);
     setSortBy(sortParam && VALID_SORTS.includes(sortParam) ? sortParam : 'featured');
     setPriceRange([minParam, maxParam]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchParams, maxCatalogPrice]);
+  }, [searchParams, maxCatalogPrice, setQuery]);
 
   const updateUrlParams = (overrides: {
     q?: string;
@@ -123,7 +122,7 @@ export default function ShopPage() {
   }, [activeCategory, favOnly, favorites, priceRange, results, sortBy]);
 
   return (
-    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 space-y-6">
+    <div className="max-w-[var(--container-max)] mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-6">
       {/* Kompakt Başlık & Sayım */}
       <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-[var(--color-ink)] pb-4">
         <div className="space-y-1">
@@ -146,7 +145,7 @@ export default function ShopPage() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
           {/* Fuse.js Arama */}
           <div className="md:col-span-5 relative">
-            <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-ink-soft)]" />
+            <Search aria-hidden="true" className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-[var(--color-ink-soft)]" />
             <input
               type="search"
               value={query}
@@ -157,7 +156,7 @@ export default function ShopPage() {
               }}
               placeholder={COPY.shop.searchPlaceholder}
               aria-label={COPY.shop.searchAria}
-              className="w-full h-11 pl-10 pr-4 rounded-full pop-border bg-[var(--color-white)] text-sm"
+              className="w-full h-11 pl-10 pr-4 rounded-full pop-border bg-[var(--color-white)] text-base sm:text-sm"
             />
           </div>
 
@@ -185,8 +184,8 @@ export default function ShopPage() {
               <Slider.Track className="bg-[var(--color-cream)] pop-border relative grow rounded-full h-2.5">
                 <Slider.Range className="absolute bg-[var(--color-tomato)] rounded-full h-full" />
               </Slider.Track>
-              <Slider.Thumb className="block w-5 h-5 rounded-full pop-border bg-[var(--color-butter)] cursor-pointer" />
-              <Slider.Thumb className="block w-5 h-5 rounded-full pop-border bg-[var(--color-butter)] cursor-pointer" />
+              <Slider.Thumb className="relative block w-5 h-5 rounded-full pop-border bg-[var(--color-butter)] cursor-pointer before:content-[''] before:absolute before:-inset-3 focus-visible:outline-3 focus-visible:outline-[var(--focus-ring)] focus-visible:outline-offset-2" />
+              <Slider.Thumb className="relative block w-5 h-5 rounded-full pop-border bg-[var(--color-butter)] cursor-pointer before:content-[''] before:absolute before:-inset-3 focus-visible:outline-3 focus-visible:outline-[var(--focus-ring)] focus-visible:outline-offset-2" />
             </Slider.Root>
           </div>
 
@@ -236,7 +235,8 @@ export default function ShopPage() {
           <button
             type="button"
             onClick={() => navigate(`/shop${searchParams.toString() ? `?${searchParams.toString()}` : ''}`)}
-            className={`px-4 py-1.5 rounded-full pop-border font-display font-semibold text-sm cursor-pointer ${
+            aria-pressed={activeCategory === 'tumu'}
+            className={`min-h-[44px] inline-flex items-center px-4 py-2 rounded-full pop-border font-display font-semibold text-sm cursor-pointer ${
               activeCategory === 'tumu'
                 ? 'bg-[var(--color-ink)] text-[var(--color-cream)]'
                 : 'bg-[var(--color-cream)]'
@@ -251,7 +251,8 @@ export default function ShopPage() {
                 key={cat.slug}
                 type="button"
                 onClick={() => navigate(`/shop/${cat.slug}${searchParams.toString() ? `?${searchParams.toString()}` : ''}`)}
-                className="px-4 py-1.5 rounded-full pop-border font-display font-semibold text-sm cursor-pointer"
+                aria-pressed={isActive}
+                className="min-h-[44px] inline-flex items-center px-4 py-2 rounded-full pop-border font-display font-semibold text-sm cursor-pointer"
                 style={{
                   backgroundColor: isActive ? cat.color : 'var(--color-cream)',
                   color: isActive ? cat.inkColor : 'var(--color-ink)',
@@ -270,13 +271,14 @@ export default function ShopPage() {
               updateUrlParams({ fav: nextFav });
             }}
             aria-pressed={favOnly}
-            className={`px-4 py-1.5 rounded-full pop-border font-display font-semibold text-sm cursor-pointer inline-flex items-center gap-1.5 transition-colors ${
+            className={`min-h-[44px] px-4 py-2 rounded-full pop-border font-display font-semibold text-sm cursor-pointer inline-flex items-center gap-1.5 transition-colors ${
               favOnly
                 ? 'bg-[var(--color-pink)] text-[var(--color-ink)]'
                 : 'bg-[var(--color-cream)] hover:bg-[var(--color-pink)]/40'
             }`}
           >
             <Heart
+              aria-hidden="true"
               className="w-3.5 h-3.5"
               fill={favOnly ? 'var(--color-ink)' : 'none'}
             />
@@ -286,6 +288,7 @@ export default function ShopPage() {
       </div>
 
       {/* Ürün Izgarası */}
+      <h2 className="sr-only">Ürünler</h2>
       {filteredProducts.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredProducts.map((product) => (

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>/</loc></url>
-  <url><loc>/shop</loc></url>
-  <url><loc>/shop/sert-seker</loc></url>
-  <url><loc>/shop/jelibon</loc></url>
-  <url><loc>/shop/cikolata-kapli</loc></url>
-  <url><loc>/shop/lolipop-sakiz</loc></url>
-  <url><loc>/shop/geleneksel</loc></url>
-  <url><loc>/shop/tuzlu-atistirmalik</loc></url>
-  <url><loc>/mix</loc></url>
-  <url><loc>/about</loc></url>
-  <url><loc>/info</loc></url>
-  <url><loc>/credits</loc></url>
+  <url><loc>https://lupuk.com.tr/</loc></url>
+  <url><loc>https://lupuk.com.tr/shop</loc></url>
+  <url><loc>https://lupuk.com.tr/shop/sert-seker</loc></url>
+  <url><loc>https://lupuk.com.tr/shop/jelibon</loc></url>
+  <url><loc>https://lupuk.com.tr/shop/cikolata-kapli</loc></url>
+  <url><loc>https://lupuk.com.tr/shop/lolipop-sakiz</loc></url>
+  <url><loc>https://lupuk.com.tr/shop/geleneksel</loc></url>
+  <url><loc>https://lupuk.com.tr/shop/tuzlu-atistirmalik</loc></url>
+  <url><loc>https://lupuk.com.tr/mix</loc></url>
+  <url><loc>https://lupuk.com.tr/about</loc></url>
+  <url><loc>https://lupuk.com.tr/info</loc></url>
+  <url><loc>https://lupuk.com.tr/credits</loc></url>
 </urlset>
